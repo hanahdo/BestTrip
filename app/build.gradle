@@ -77,8 +77,10 @@ dependencies {
     // Dagger 2
     kapt 'com.google.dagger:dagger-compiler:2.11'
     implementation 'com.google.dagger:dagger:2.11'
-    //RxKotlin 2
+    //RxKotlin 2 + RxJava
     implementation 'com.github.ReactiveX:RxKotlin:2.x-SNAPSHOT'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.2.0'
     kapt 'com.github.bumptech.glide:compiler:4.2.0'

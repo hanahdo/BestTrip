@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App TextView -->
     <declare-styleable name="BTextView">
         <attr name="bFont" format="enum">
-            <enum name="Roboto Regular" value="roboto_regular.ttf" />
-            <enum name="Roboto Light" value="roboto_light.ttf" />
-            <enum name="Roboto Bold" value="roboto_bold.ttf" />
-            <enum name="Roboto Medium" value="roboto_medium.ttf" />
+            <enum name="RobotoRegular" value="0" />
+            <enum name="RobotoLight" value="1" />
+            <enum name="RobotoBold" value="2" />
+            <enum name="RobotoMedium" value="3" />
         </attr>
-        <attr name="bFontSize" format="enum">
-            <enum name="10" value="10f" />
-            <enum name="12" value="12f" />
-            <enum name="14" value="14f" />
-            <enum name="16" value="16f" />
-            <enum name="18" value="18f" />
-            <enum name="20" value="20f" />
-            <enum name="22" value="22f" />
-            <enum name="24" value="24f" />
-            <enum name="26" value="26f" />
-            <enum name="28" value="28f" />
-            <enum name="30" value="30f" />
-        </attr>
+    </declare-styleable>
+
+    <!-- App Toolbar -->
+    <declare-styleable name="BToolbar">
+        <attr name="tbTitle" format="string" />
     </declare-styleable>
 </resources>

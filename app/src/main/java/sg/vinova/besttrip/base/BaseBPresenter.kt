@@ -7,7 +7,7 @@ import java.lang.ref.WeakReference
 /**
  * Created by Hanah on 11/22/2017.
  */
-class BaseBPresenter<T>(context: Context) {
+open class BaseBPresenter<T>(context: Context) {
     lateinit var weakReference: WeakReference<T>
     lateinit var requestSubscriptions: CompositeDisposable
 

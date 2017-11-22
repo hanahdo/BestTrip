@@ -18,14 +18,7 @@ abstract class BaseBActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         BApplication.instance.component.inject(this)
         inject()
-
-        if (isFullScreen()) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE)
-            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        }
-
         setContentView(getLayoutId())
-
         init()
     }
 
@@ -36,8 +29,6 @@ abstract class BaseBActivity : AppCompatActivity() {
     abstract fun inject()
 
     abstract fun init()
-
-    abstract fun isFullScreen(): Boolean
 
     open fun changeFragment(fragment: BaseBFragment, addBackStack: Boolean) {
         val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
