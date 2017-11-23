@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "761861408556",
+    "firebase_url": "https://besttripvinova.firebaseio.com",
+    "project_id": "besttripvinova",
+    "storage_bucket": "besttripvinova.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761861408556:android:be76e8b2587743bc",
+        "android_client_info": {
+          "package_name": "sg.vinova.besttrip.dev.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761861408556-0clv0a1bgho9t1t1ktlm7fdv5b6igvi6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sg.vinova.besttrip.dev.debug",
+            "certificate_hash": "482ebfd283782ed854271889f47c175ae899c1e4"
+          }
+        },
+        {
+          "client_id": "761861408556-qoo3jcmp1ktg7k6ueru95kald19rqgne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJw8OIqf3kbYLKc16cVqNB5nqfIU4L9LU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761861408556-qoo3jcmp1ktg7k6ueru95kald19rqgne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761861408556:android:d7ca7b37cfdf8c19",
+        "android_client_info": {
+          "package_name": "sg.vinova.besttrip.prod.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761861408556-c6cqq6pgbfm1ehe3obgtghsk7e3jjhr7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sg.vinova.besttrip.prod.debug",
+            "certificate_hash": "482ebfd283782ed854271889f47c175ae899c1e4"
+          }
+        },
+        {
+          "client_id": "761861408556-qoo3jcmp1ktg7k6ueru95kald19rqgne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJw8OIqf3kbYLKc16cVqNB5nqfIU4L9LU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761861408556-qoo3jcmp1ktg7k6ueru95kald19rqgne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

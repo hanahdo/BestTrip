@@ -16,8 +16,6 @@ import sg.vinova.besttrip.R
 abstract class BaseBActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        BApplication.instance.component.inject(this)
-        inject()
         setContentView(getLayoutId())
         init()
     }
@@ -25,8 +23,6 @@ abstract class BaseBActivity : AppCompatActivity() {
     abstract fun replaceFragmentId(): Int
 
     abstract fun getLayoutId(): Int
-
-    abstract fun inject()
 
     abstract fun init()
 

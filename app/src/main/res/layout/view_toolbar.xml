@@ -1,41 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?android:actionBarSize"
-    android:background="#271d5d"
-    app:contentInsetEnd="0dp"
-    app:contentInsetStart="0dp">
+    android:background="@color/background">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/ivLeft"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:padding="@dimen/default_padding_bigger" />
+
+    <sg.vinova.besttrip.widgets.BTextView
+        android:id="@+id/tvTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="?android:actionBarSize"
+        android:layout_toEndOf="@id/ivLeft"
+        android:layout_toStartOf="@id/ivRight"
+        android:gravity="center_vertical"
+        app:bFont="RobotoMedium" />
 
-        <ImageView
-            android:id="@+id/ivLeft"
-            android:layout_width="?android:actionBarSize"
-            android:layout_height="?android:actionBarSize"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:padding="@dimen/default_padding_bigger" />
+    <ImageView
+        android:id="@+id/ivRight"
+        android:layout_width="?android:actionBarSize"
+        android:layout_height="?android:actionBarSize"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/default_padding_bigger" />
 
-        <sg.vinova.besttrip.widgets.BTextView
-            android:id="@+id/tvTitle"
-            android:layout_width="0dp"
-            android:layout_height="?android:actionBarSize"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:textColor="@color/white"
-            app:bFont="RobotoMedium"/>
-
-        <ImageView
-            android:id="@+id/ivRight"
-            android:layout_width="?android:actionBarSize"
-            android:layout_height="?android:actionBarSize"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:padding="@dimen/default_padding_bigger"
-            android:visibility="invisible" />
-    </LinearLayout>
-
-</android.support.v7.widget.Toolbar>
+</RelativeLayout>

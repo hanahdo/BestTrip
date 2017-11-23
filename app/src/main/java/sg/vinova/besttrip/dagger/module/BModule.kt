@@ -18,4 +18,7 @@ class BModule(private val app:BApplication) {
     @Provides
     @Singleton
     fun getHandler() = Handler()
+
+    @Provides
+    fun getContext() = app.applicationContext!!
 }
