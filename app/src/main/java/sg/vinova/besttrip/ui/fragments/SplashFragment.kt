@@ -56,6 +56,6 @@ class SplashFragment : BaseBFragment() {
     }
 
     fun changeLoginFragment() {
-//        changeFragment()
+        changeFragment(LoginFragment.newInstance(), false)
     }
 }

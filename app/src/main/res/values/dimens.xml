@@ -4,12 +4,16 @@
     <dimen name="default_padding_smaller">4dp</dimen>
     <dimen name="default_padding_small">8dp</dimen>
     <dimen name="default_padding">10dp</dimen>
+    <dimen name="default_padding_b">10dp</dimen>
     <dimen name="default_padding_big">14dp</dimen>
     <dimen name="default_padding_bigger">16dp</dimen>
     <dimen name="default_padding_large">20dp</dimen>
     <dimen name="default_padding_x">30dp</dimen>
     <dimen name="default_padding_xx">40dp</dimen>
     <dimen name="default_padding_xxx">50dp</dimen>
+
+    <!-- Default Size -->
+    <dimen name="default_login_views_height">50dp</dimen>
 
     <!-- Text Size -->
     <dimen name="default_text_size_smaller">10sp</dimen>
