@@ -7,4 +7,12 @@
     <string name="roboto_medium">roboto_medium.ttf</string>
     <string name="roboto_bold">roboto_bold.ttf</string>
 
+    <!-- Login Fragment -->
+    <string name="best_trip_with_us">Best trip with us</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login_with_email">Login with email</string>
+    <string name="email">Email Address</string>
+
 </resources>

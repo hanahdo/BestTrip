@@ -11,6 +11,8 @@ open class BaseBPresenter<T>(context: Context) {
     lateinit var weakReference: WeakReference<T>
     lateinit var requestSubscriptions: CompositeDisposable
 
+    fun isViewExisted(): Boolean = weakReference.get() != null
+
     fun bind(t: T) {
         weakReference = WeakReference(t)
         requestSubscriptions = CompositeDisposable()

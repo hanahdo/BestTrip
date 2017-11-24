@@ -54,7 +54,7 @@ android {
         }
     }
 
-    kapt{
+    kapt {
         correctErrorTypes = true
         generateStubs = true
     }
@@ -88,4 +88,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-auth:11.6.0'
 }
+
+
+apply plugin: 'com.google.gms.google-services'

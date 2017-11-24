@@ -23,9 +23,5 @@ class GlideUtils {
         fun loadImage(resource: Int, context: Context, imageView: ImageView) {
             Glide.with(context).load(resource).into(imageView)
         }
-
-        fun loadImage(resource: Drawable, context: Context, imageView: ImageView) {
-            Glide.with(context).load(resource).into(imageView)
-        }
     }
 }
