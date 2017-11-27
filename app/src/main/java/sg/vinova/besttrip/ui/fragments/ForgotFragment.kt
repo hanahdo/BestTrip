@@ -1,7 +1,5 @@
 package sg.vinova.besttrip.ui.fragments
 
-import android.content.DialogInterface
-import android.support.v7.app.AlertDialog
 import android.text.TextUtils
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_forgot.*
@@ -11,6 +9,7 @@ import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.presenter.ForgotPresenter
 import sg.vinova.besttrip.services.BaseListener
+import sg.vinova.besttrip.widgets.dialogs.BDialog
 import javax.inject.Inject
 
 /**
@@ -34,6 +33,9 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
         if (!isAdded) return
         if (activity is LoginActivity)
             mActivity = activity as LoginActivity
+
+        mActivity.showToolbar()
+        mActivity.setLeftIcon(R.drawable.back)
 
         onClick()
     }
@@ -77,16 +79,7 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
         changeFragment(LoginFragment.newInstance(), false)
     }
 
-    fun error(localizedMessage: String?) {
-        AlertDialog.Builder(context)
-                .setTitle("Error")
-                .setMessage(localizedMessage)
-                .create().apply {
-            setButton(DialogInterface.BUTTON_NEUTRAL,
-                    "OK",
-                    { iDialog, _ -> iDialog.dismiss() })
-            show()
-            setCanceledOnTouchOutside(true)
-        }
+    fun error(error: String?) {
+        BDialog(context).setMessage(error)!!.show()
     }
 }

@@ -7,7 +7,7 @@
     <string name="roboto_medium">roboto_medium.ttf</string>
     <string name="roboto_bold">roboto_bold.ttf</string>
 
-    <!-- Login Fragment -->
+    <!-- Login Activity -->
     <string name="best_trip_with_us">Best trip with us</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign up</string>
@@ -18,5 +18,11 @@
     <string name="sign_up_with_email">Sign up with email</string>
     <string name="enter_your_email_address_to_reset_password">Enter your email address to reset password</string>
     <string name="send_instruction">Send instruction</string>
+
+    <!-- Custom Error Dialog -->
+    <string name="title">Title</string>
+    <string name="message">message</string>
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
 
 </resources>

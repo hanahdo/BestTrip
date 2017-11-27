@@ -9,6 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
+import kotlin.reflect.KClass
 
 /**
  * Created by hanah on 11/22/17.

@@ -1,15 +1,13 @@
 package sg.vinova.besttrip.ui.fragments
 
-import android.content.DialogInterface
 import android.os.Handler
-import android.support.v7.app.AlertDialog
-import com.google.firebase.auth.FirebaseUser
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.presenter.SplashPresenter
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
+import sg.vinova.besttrip.widgets.dialogs.BDialog
 import javax.inject.Inject
 
 /**
@@ -44,17 +42,8 @@ class SplashFragment : BaseBFragment() {
 
     override fun unbindPresenter() = presenter.unbind()
 
-    fun error(localizedMessage: String?) {
-        AlertDialog.Builder(context)
-                .setTitle("Error")
-                .setMessage(localizedMessage)
-                .create().apply {
-            setButton(DialogInterface.BUTTON_NEUTRAL,
-                    "OK",
-                    { iDialog, _ -> iDialog.dismiss() })
-            show()
-            setCanceledOnTouchOutside(true)
-        }
+    fun error(error: String?) {
+        BDialog(context).setMessage(error)!!.show()
     }
 
     fun loginSuccess() {

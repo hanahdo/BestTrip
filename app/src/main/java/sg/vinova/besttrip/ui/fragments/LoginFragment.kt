@@ -1,7 +1,5 @@
 package sg.vinova.besttrip.ui.fragments
 
-import android.content.DialogInterface
-import android.support.v7.app.AlertDialog
 import android.text.TextUtils
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -11,6 +9,7 @@ import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.presenter.LoginPresenter
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
+import sg.vinova.besttrip.widgets.dialogs.BDialog
 import javax.inject.Inject
 
 /**
@@ -55,6 +54,7 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
         tvSignUp.setOnClickListener(this)
         btnLoginEmail.setOnClickListener(this)
         tvForgot.setOnClickListener(this)
+        tvSkip.setOnClickListener(this)
     }
 
     override fun bindPresenter() {
@@ -87,6 +87,9 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
             R.id.tvForgot -> {
                 changeFragment(ForgotFragment.newInstance(), true)
             }
+            R.id.tvSkip -> {
+                changeActivity(MapActivity::class.java)
+            }
         }
     }
 
@@ -95,15 +98,6 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
     }
 
     fun error(error: String?) {
-        AlertDialog.Builder(context)
-                .setTitle("Error")
-                .setMessage(error)
-                .create().apply {
-            setButton(DialogInterface.BUTTON_NEUTRAL,
-                    "OK",
-                    { iDialog, _ -> iDialog.dismiss() })
-            show()
-            setCanceledOnTouchOutside(true)
-        }
+        BDialog(context).setMessage(error)!!.show()
     }
 }

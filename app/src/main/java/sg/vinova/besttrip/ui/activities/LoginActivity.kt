@@ -26,12 +26,14 @@ class LoginActivity : BaseBActivity() {
         toolbar.setToolbarTitle(string)
     }
 
-    fun setLeftIcon(int: Int) {
-        toolbar.setLeftIcon(int)
+    fun setLeftIcon(int: Int?) {
+        if (int == null) toolbar.hideLeftIcon()
+        else toolbar.setLeftIcon(int)
     }
 
-    fun setRightIcon(int: Int) {
-        toolbar.setRightIcon(int)
+    fun setRightIcon(int: Int?) {
+        if (int == null) toolbar.hideRightIcon()
+        else toolbar.setRightIcon(int)
     }
 
     fun setToolbarListener(listener: BaseListener.OnToolbarClickListener) {

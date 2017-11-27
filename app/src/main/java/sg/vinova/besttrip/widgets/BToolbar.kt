@@ -3,6 +3,7 @@ package sg.vinova.besttrip.widgets
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.view.View
 import android.widget.Toolbar
 import kotlinx.android.synthetic.main.view_toolbar.view.*
 import sg.vinova.besttrip.R
@@ -61,6 +62,14 @@ class BToolbar : Toolbar {
     fun setToolbarTitle(string: String?) {
         if (string == null) return
         tvTitle.text = string
+    }
+
+    fun hideLeftIcon() {
+        ivLeft.visibility = View.INVISIBLE
+    }
+
+    fun hideRightIcon() {
+        ivRight.visibility = View.INVISIBLE
     }
 
     fun setLeftIcon(drawable: Int) {

@@ -1,6 +1,8 @@
 package sg.vinova.besttrip.presenter
 
 import android.content.Context
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +28,9 @@ class LoginPresenter @Inject constructor(private var context: Context) : BaseBPr
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({ task ->
                             if (task.isComplete)
-                                weakReference!!.get()!!.loginSuccess()
+                                task.addOnCompleteListener({
+                                    weakReference!!.get()!!.loginSuccess()
+                                })
                             else
                                 task.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
