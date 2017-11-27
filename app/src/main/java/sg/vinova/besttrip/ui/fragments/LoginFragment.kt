@@ -85,7 +85,7 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
                     presenter.loginWithEmail(email, password)
             }
             R.id.tvForgot -> {
-//                changeFragment(ForgotFragment.newInstance(), true)
+                changeFragment(ForgotFragment.newInstance(), true)
             }
         }
     }

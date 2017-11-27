@@ -7,9 +7,7 @@ import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.dagger.module.BModule
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
-import sg.vinova.besttrip.ui.fragments.LoginFragment
-import sg.vinova.besttrip.ui.fragments.MenuFragment
-import sg.vinova.besttrip.ui.fragments.SplashFragment
+import sg.vinova.besttrip.ui.fragments.*
 import javax.inject.Singleton
 
 /**
@@ -37,4 +35,8 @@ interface BComponent {
     fun inject(fragment: MenuFragment)
 
     fun inject(fragment: LoginFragment)
+
+    fun inject(fragment: SignUpFragment)
+
+    fun inject(fragment: ForgotFragment)
 }

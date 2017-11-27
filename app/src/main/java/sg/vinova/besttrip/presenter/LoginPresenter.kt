@@ -9,6 +9,7 @@ import sg.vinova.besttrip.ui.fragments.LoginFragment
 import sg.vinova.besttrip.utils.FirebaseUtils
 import javax.inject.Inject
 
+
 /**
  * Created by hanah on 11/24/17.
  */
@@ -27,7 +28,7 @@ class LoginPresenter @Inject constructor(private var context: Context) : BaseBPr
                             if (task.isComplete)
                                 weakReference!!.get()!!.loginSuccess()
                             else
-                                weakReference!!.get()!!.error(task.exception!!.localizedMessage)
+                                task.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
         )
     }

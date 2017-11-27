@@ -27,7 +27,7 @@ class ForgotPresenter @Inject constructor(private var context: Context) : BaseBP
                             if (task.isComplete) {
                                 weakReference!!.get()!!.forgotSuccess()
                             } else
-                                weakReference!!.get()!!.error(task.exception!!.localizedMessage)
+                                task.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
         )
     }

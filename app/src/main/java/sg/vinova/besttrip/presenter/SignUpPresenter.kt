@@ -29,7 +29,7 @@ class SignUpPresenter @Inject constructor(private var context: Context) : BaseBP
                                 task.result.user.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(username).build())
                                 weakReference!!.get()!!.signUpSuccess()
                             } else
-                                weakReference!!.get()!!.error(task.exception!!.localizedMessage)
+                                task.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
         )
     }

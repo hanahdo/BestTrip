@@ -35,7 +35,7 @@ class SplashPresenter @Inject constructor(private var context: Context) : BaseBP
                             if (task.isComplete)
                                 weakReference!!.get()!!.loginSuccess()
                             else
-                                weakReference!!.get()!!.error(task.exception!!.localizedMessage)
+                                task.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
         )
     }
