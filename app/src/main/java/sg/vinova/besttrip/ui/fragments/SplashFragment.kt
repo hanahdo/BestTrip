@@ -1,7 +1,9 @@
 package sg.vinova.besttrip.ui.fragments
 
 import android.content.DialogInterface
+import android.os.Handler
 import android.support.v7.app.AlertDialog
+import com.google.firebase.auth.FirebaseUser
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
@@ -32,6 +34,8 @@ class SplashFragment : BaseBFragment() {
         if (!isAdded) return
         if (activity is LoginActivity)
             mActivity = activity as LoginActivity
+
+        Handler().postDelayed({ presenter.checkUserLogin() }, 2000)
     }
 
     override fun bindPresenter() = presenter.bind(this)
@@ -51,7 +55,7 @@ class SplashFragment : BaseBFragment() {
         }
     }
 
-    fun loginSuccess() {
+    fun loginSuccess(mUser: FirebaseUser) {
         changeActivity(MapActivity::class.java)
     }
 
