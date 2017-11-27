@@ -35,6 +35,8 @@ class SplashFragment : BaseBFragment() {
         if (activity is LoginActivity)
             mActivity = activity as LoginActivity
 
+        mActivity.hideToolbar()
+
         Handler().postDelayed({ presenter.checkUserLogin() }, 2000)
     }
 
@@ -55,7 +57,7 @@ class SplashFragment : BaseBFragment() {
         }
     }
 
-    fun loginSuccess(mUser: FirebaseUser) {
+    fun loginSuccess() {
         changeActivity(MapActivity::class.java)
     }
 

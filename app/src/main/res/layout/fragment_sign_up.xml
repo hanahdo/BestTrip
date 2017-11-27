@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textSize="@dimen/default_text_size_xx_huge" />
+            android:textSize="@dimen/default_text_size_xxx_huge" />
 
         <sg.vinova.besttrip.widgets.BTextView
             android:layout_width="wrap_content"
@@ -40,6 +40,7 @@
             android:paddingTop="@dimen/default_padding">
 
             <sg.vinova.besttrip.widgets.BTextView
+                android:id="@+id/tvLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/default_login_views_height"
                 android:layout_weight="1"
@@ -48,10 +49,10 @@
                 android:text="@string/login"
                 android:textSize="@dimen/default_text_size_bigger"
                 app:bFont="RobotoMedium"
+                app:bFontColor="@color/grey_bold"
                 app:bTextAlign="Right" />
 
             <sg.vinova.besttrip.widgets.BTextView
-                android:id="@+id/tvSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/default_login_views_height"
                 android:layout_weight="1"
@@ -60,7 +61,6 @@
                 android:text="@string/sign_up"
                 android:textSize="@dimen/default_text_size_bigger"
                 app:bFont="RobotoMedium"
-                app:bFontColor="@color/grey_bold"
                 app:bTextAlign="Left" />
         </LinearLayout>
 
@@ -75,6 +75,24 @@
             android:orientation="vertical">
 
             <sg.vinova.besttrip.widgets.BEditText
+                android:id="@+id/edtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_login_views_height"
+                android:drawablePadding="@dimen/default_padding"
+                android:drawableStart="@drawable/user_off"
+                android:inputType="textEmailAddress"
+                android:paddingEnd="@dimen/default_padding"
+                android:paddingStart="@dimen/default_padding"
+                android:textSize="@dimen/default_text_size"
+                app:bFont="RobotoLight"
+                app:bHint="@string/username" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/grey_light" />
+
+            <sg.vinova.besttrip.widgets.BEditText
                 android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_login_views_height"
@@ -83,6 +101,7 @@
                 android:inputType="textEmailAddress"
                 android:paddingEnd="@dimen/default_padding"
                 android:paddingStart="@dimen/default_padding"
+                android:textSize="@dimen/default_text_size"
                 app:bFont="RobotoLight"
                 app:bHint="@string/email" />
 
@@ -100,6 +119,7 @@
                 android:inputType="textPassword"
                 android:paddingEnd="@dimen/default_padding"
                 android:paddingStart="@dimen/default_padding"
+                android:textSize="@dimen/default_text_size"
                 app:bFont="RobotoLight"
                 app:bHint="Password" />
         </LinearLayout>
@@ -115,26 +135,19 @@
             <ImageView
                 android:layout_width="@dimen/default_login_views_height"
                 android:layout_height="@dimen/default_login_views_height"
-                android:layout_marginEnd="@dimen/default_padding_smaller"
+                android:layout_marginEnd="@dimen/default_padding_small"
                 android:background="@drawable/bg_b_button"
                 android:padding="@dimen/default_padding_bigger"
                 android:src="@drawable/fb" />
 
             <sg.vinova.besttrip.widgets.BButton
-                android:id="@+id/btnLoginEmail"
+                android:id="@+id/btnSignUpEmail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_login_views_height"
-                android:text="@string/login_with_email"
+                android:text="@string/sign_up_with_email"
                 app:bBackground="@drawable/bg_b_button"
                 app:bFontColor="@color/background" />
         </LinearLayout>
-
-        <sg.vinova.besttrip.widgets.BTextView
-            android:id="@+id/tvForgot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/forgot_password" />
     </LinearLayout>
 
 </LinearLayout>

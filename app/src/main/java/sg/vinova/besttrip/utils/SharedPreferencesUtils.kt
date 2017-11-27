@@ -57,4 +57,14 @@ class SharedPreferencesUtils(private var context: Context) {
         }
         return false
     }
+
+    fun clearToken(): Boolean {
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        if (preferences != null) {
+            val editor = preferences.edit()
+            editor.putString(Constant.TokenKey, "")
+            return editor.commit()
+        }
+        return false
+    }
 }

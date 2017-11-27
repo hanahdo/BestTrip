@@ -8,10 +8,10 @@ import java.lang.ref.WeakReference
  * Created by Hanah on 11/22/2017.
  */
 open class BaseBPresenter<T>(context: Context) {
-    lateinit var weakReference: WeakReference<T>
-    lateinit var requestSubscriptions: CompositeDisposable
+    var weakReference: WeakReference<T>? = null
+    var requestSubscriptions: CompositeDisposable? = null
 
-    fun isViewExisted(): Boolean = weakReference.get() != null
+    fun isViewExisted(): Boolean = weakReference!!.get() != null
 
     fun bind(t: T) {
         weakReference = WeakReference(t)
@@ -19,7 +19,8 @@ open class BaseBPresenter<T>(context: Context) {
     }
 
     fun unbind() {
-        requestSubscriptions.clear()
-        requestSubscriptions.dispose()
+        if (requestSubscriptions == null) return
+        requestSubscriptions!!.clear()
+        requestSubscriptions!!.dispose()
     }
 }

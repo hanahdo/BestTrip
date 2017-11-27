@@ -1,5 +1,6 @@
 package sg.vinova.besttrip.ui.activities
 
+import android.view.View
 import kotlinx.android.synthetic.main.activity_login.*
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBActivity
@@ -35,5 +36,15 @@ class LoginActivity : BaseBActivity() {
 
     fun setToolbarListener(listener: BaseListener.OnToolbarClickListener) {
         toolbar.listener = listener
+    }
+
+    fun hideToolbar() {
+        if (toolbar.visibility == View.VISIBLE)
+            toolbar.visibility = View.GONE
+    }
+
+    fun showToolbar() {
+        if (toolbar.visibility == View.GONE)
+            toolbar.visibility = View.VISIBLE
     }
 }

@@ -11,11 +11,11 @@ import sg.vinova.besttrip.R
  * Created by hanah on 11/22/17.
  */
 abstract class BaseBFragment : Fragment() {
-    private lateinit var baseActivity: BaseBActivity
+    private var baseActivity: BaseBActivity? = null
 
     abstract fun getLayoutId(): Int
 
-//    abstract fun getLeftIcon(): Int
+//  fun getLeftIcon(): Int
 
     abstract fun inject()
 
@@ -28,7 +28,7 @@ abstract class BaseBFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()
-        if (activity is BaseBActivity)
+        if (activity is BaseBActivity && baseActivity == null)
             baseActivity = activity as BaseBActivity
     }
 
@@ -48,17 +48,17 @@ abstract class BaseBFragment : Fragment() {
         unbindPresenter()
     }
 
-    open fun getBaseBActivity(): BaseBActivity = baseActivity
+    open fun getBaseBActivity(): BaseBActivity = baseActivity!!
 
     fun changeFragment(fragment: BaseBFragment, addBackStack: Boolean) {
-        baseActivity.changeFragment(fragment, addBackStack)
+        baseActivity!!.changeFragment(fragment, addBackStack)
     }
 
     fun replaceFragment(fragment: BaseBFragment, containerId: Int) {
-        baseActivity.replaceFragment(fragment, containerId)
+        baseActivity!!.replaceFragment(fragment, containerId)
     }
 
     fun changeActivity(cls: Class<*>) {
-        baseActivity.changeActivity(cls)
+        baseActivity!!.changeActivity(cls)
     }
 }

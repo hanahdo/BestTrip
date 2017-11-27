@@ -4,33 +4,32 @@ import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
 import android.view.View
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
-import sg.vinova.besttrip.presenter.LoginPresenter
+import sg.vinova.besttrip.presenter.SignUpPresenter
 import sg.vinova.besttrip.ui.activities.LoginActivity
-import sg.vinova.besttrip.ui.activities.MapActivity
 import javax.inject.Inject
 
 /**
- * Created by hanah on 11/24/17.
+ * Created by hanah on 11/27/17.
  */
-class LoginFragment : BaseBFragment(), View.OnClickListener {
+class SignUpFragment : BaseBFragment(), View.OnClickListener {
     private lateinit var mActivity: LoginActivity
-
-    @Inject lateinit var presenter: LoginPresenter
+    @Inject lateinit var presenter: SignUpPresenter
+    private var email: String = ""
 
     companion object {
-        fun newInstance(): LoginFragment = LoginFragment()
-        fun newInstance(email: String): LoginFragment {
-            val fragment = LoginFragment()
+        fun newInstance(): SignUpFragment = SignUpFragment()
+        fun newInstance(email: String): SignUpFragment {
+            val fragment = SignUpFragment()
             fragment.email = email
             return fragment
         }
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_login
+    override fun getLayoutId(): Int = R.layout.fragment_sign_up
 
     override fun inject() {
         BApplication.instance.component.inject(this)
@@ -52,10 +51,10 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
     }
 
     private fun onClick() {
-        tvSignUp.setOnClickListener(this)
-        btnLoginEmail.setOnClickListener(this)
-        tvForgot.setOnClickListener(this)
+        tvLogin.setOnClickListener(this)
+        btnSignUpEmail.setOnClickListener(this)
     }
+
 
     override fun bindPresenter() {
         presenter.bind(this)
@@ -65,33 +64,36 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
         presenter.unbind()
     }
 
-    private var email: String = ""
     private var password: String = ""
+    private var username: String = ""
 
     override fun onClick(v: View?) {
         if (v == null) return
+
+        if (edtUsername.text != null || !TextUtils.isEmpty(edtUsername.text))
+            username = edtUsername.text.toString()
         if (edtEmail.text != null || !TextUtils.isEmpty(edtEmail.text))
             email = edtEmail.text.toString()
         if (edtPassword.text != null || !TextUtils.isEmpty(edtPassword.text))
             password = edtPassword.text.toString()
+
         when (v.id) {
-            R.id.tvSignUp -> {
+            R.id.tvLogin -> {
                 if (!TextUtils.isEmpty(email))
-                    changeFragment(SignUpFragment.newInstance(email), false)
-                changeFragment(SignUpFragment.newInstance(), false)
+                    changeFragment(LoginFragment.newInstance(email), false)
+                changeFragment(LoginFragment.newInstance(), false)
             }
-            R.id.btnLoginEmail -> {
-                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password))
-                    presenter.loginWithEmail(email, password)
-            }
-            R.id.tvForgot -> {
-//                changeFragment(ForgotFragment.newInstance(), true)
+            R.id.btnSignUpEmail -> {
+                if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password))
+                    presenter.signUpWithEmail(username, email, password)
             }
         }
     }
 
-    fun loginSuccess() {
-        changeActivity(MapActivity::class.java)
+    fun signUpSuccess() {
+        if (!TextUtils.isEmpty(email))
+            changeFragment(LoginFragment.newInstance(email), false)
+        changeFragment(LoginFragment.newInstance(), false)
     }
 
     fun error(error: String?) {

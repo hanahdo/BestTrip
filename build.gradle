@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.1.60'
+    ext.kotlin_version = '1.1.61'
     repositories {
         google()
         jcenter()
@@ -22,6 +22,13 @@ allprojects {
         jcenter()
         maven { url 'https://jitpack.io' }
     }
+}
+
+ext {
+    firebaseVersion = '11.6.0'
+    daggerVersion = '2.11'
+    glideVersion = '4.2.0'
+    retrofitVersion = '2.3.0'
 }
 
 task clean(type: Delete) {
