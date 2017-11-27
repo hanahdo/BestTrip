@@ -33,7 +33,8 @@ class BTextView : TextView {
         if (context == null) return
         val typedArray: TypedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.BTextView, defStyleAttr, defStyleRes)
 
-        /**Font family
+        /**
+         * Font family
          * Default is Roboto Regular
          */
         when (typedArray.getInt(R.styleable.BTextView_bFont, 0)) {
@@ -44,8 +45,9 @@ class BTextView : TextView {
         }
         setFont(context, fontFamily)
 
-        /** Set text alignment
-         *  Default alignment is Center
+        /**
+         * Set text alignment
+         * Default alignment is Center
          */
         textAlignment = when (typedArray.getInt(R.styleable.BTextView_bTextAlign, 0)) {
             0 -> View.TEXT_ALIGNMENT_CENTER
@@ -54,18 +56,21 @@ class BTextView : TextView {
             else -> View.TEXT_ALIGNMENT_CENTER
         }
 
-        /**Set text color
+        /**
+         * Set text color
          * Default is #FFFFFF (white)
          */
         setTextColor(typedArray.getColor(R.styleable.BTextView_bFontColor, fontColor))
 
-        /**Set background color
+        /**
+         * Set background color
          * Default is 0
          */
         setBackgroundColor(typedArray.getColor(R.styleable.BTextView_bBackgroundColor, 0))
 
-        /** Set background
-         *  Default is null
+        /**
+         * Set background
+         * Default is null
          */
         background =
                 if (typedArray.getDrawable(R.styleable.BTextView_bBackground) == null) null

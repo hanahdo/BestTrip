@@ -32,13 +32,13 @@ abstract class BaseBFragment : Fragment() {
             baseActivity = activity as BaseBActivity
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater!!.inflate(if (getLayoutId() == 0) R.layout.fragment_blank else getLayoutId(), container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view: View = inflater.inflate(if (getLayoutId() == 0) R.layout.fragment_blank else getLayoutId(), container, false)
         bindPresenter()
         return view
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
     }

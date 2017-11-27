@@ -33,16 +33,25 @@ class BToolbar : Toolbar {
 
     private fun init(context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int = 0) {
         if (context == null) return
-        //Bind layout
+        /**
+         * Bind layout
+         */
         inflate(context, R.layout.view_toolbar, this)
 
-        //Get attribute set
+        /**
+         * Get attribute set
+         */
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.BToolbar, defStyleAttr, 0)
 
-        //Set title
+        /**
+         * Set title
+         */
         tvTitle.text = typedArray.getString(R.styleable.BToolbar_bTitle)
 
-        //Font family, default is Roboto Regular
+        /**
+         * Font family
+         * Default is Roboto Regular
+         */
         fontFamily = when (typedArray.getInt(R.styleable.BButton_bFont, 0)) {
             0 -> resources.getString(R.string.roboto_regular)
             1 -> resources.getString(R.string.roboto_light)
@@ -73,11 +82,13 @@ class BToolbar : Toolbar {
     }
 
     fun setLeftIcon(drawable: Int) {
+        ivLeft.visibility = View.VISIBLE
         GlideUtils.loadImage(drawable, context, ivLeft)
         ivLeft.setOnClickListener({ listener.onLeftClick() })
     }
 
     fun setRightIcon(drawable: Int) {
+        ivLeft.visibility = View.VISIBLE
         GlideUtils.loadImage(drawable, context, ivRight)
         ivRight.setOnClickListener({ listener.onRightClick() })
     }

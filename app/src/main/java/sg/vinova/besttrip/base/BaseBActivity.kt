@@ -5,11 +5,6 @@ import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
-import android.view.Window
-import android.view.WindowManager
-import sg.vinova.besttrip.BApplication
-import sg.vinova.besttrip.R
-import kotlin.reflect.KClass
 
 /**
  * Created by hanah on 11/22/17.

@@ -34,7 +34,8 @@ class BEditText : EditText {
         if (context == null) return
         val typedArray: TypedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.BEditText, defStyleAttr, defStyleRes)
 
-        /**Font family
+        /**
+         * Font family
          * Default is Roboto Regular
          */
         fontFamily = when (typedArray.getInt(R.styleable.BEditText_bFont, 0)) {
@@ -46,26 +47,30 @@ class BEditText : EditText {
         }
         setFont(context, fontFamily)
 
-        /**Set text color
+        /**
+         * Set text color
          * Default is #271D5D (background)
          */
         setTextColor(typedArray.getColor(R.styleable.BEditText_bFontColor, fontColor))
 
-        /**Set background color
+        /**
+         * Set background color
          * Default is 0
          */
         setBackgroundColor(typedArray.getColor(R.styleable.BEditText_bBackgroundColor, 0))
 
-        /** Set background
-         *  Default is bg_b_edit_text.xml
+        /**
+         * Set background
+         * Default is bg_b_edit_text.xml
          */
         background =
                 if (typedArray.getDrawable(R.styleable.BEditText_bBackground) == null)
                     resources.getDrawable(R.drawable.bg_b_edit_text, context.theme)
                 else typedArray.getDrawable(R.styleable.BEditText_bBackground)
 
-        /** Set text alignment
-         *  Default alignment is Left
+        /**
+         * Set text alignment
+         * Default alignment is Left
          */
         textAlignment = when (typedArray.getInt(R.styleable.BEditText_bTextAlign, 1)) {
             0 -> View.TEXT_ALIGNMENT_CENTER
@@ -74,9 +79,10 @@ class BEditText : EditText {
             else -> View.TEXT_ALIGNMENT_CENTER
         }
 
-        /** Set hint color and hint text
-         *  Default hint color is #271D5D (background)
-         *  Default hint text is ''
+        /**
+         * Set hint color and hint text
+         * Default hint color is #271D5D (background)
+         * Default hint text is ''
          */
         hint =
                 if (TextUtils.isEmpty(typedArray.getString(R.styleable.BEditText_bHint))) ""

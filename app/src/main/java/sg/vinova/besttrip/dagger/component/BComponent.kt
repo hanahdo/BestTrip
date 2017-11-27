@@ -39,4 +39,6 @@ interface BComponent {
     fun inject(fragment: SignUpFragment)
 
     fun inject(fragment: ForgotFragment)
+
+    fun inject(fragment: MapFragment)
 }
