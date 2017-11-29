@@ -1,19 +1,25 @@
 package sg.vinova.besttrip.ui.fragments
 
+import android.os.Bundle
 import android.os.Handler
+import kotlinx.android.synthetic.main.fragment_splash.*
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.presenter.SplashPresenter
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
+import sg.vinova.besttrip.ui.fragments.account.LoginFragment
+import sg.vinova.besttrip.utils.KeyboardUtils
 import sg.vinova.besttrip.widgets.dialogs.BDialog
 import javax.inject.Inject
+import org.jetbrains.anko.*
 
 /**
  * Created by Hanah on 11/22/2017.
  */
 class SplashFragment : BaseBFragment() {
+
 
     @Inject lateinit var presenter: SplashPresenter
     private lateinit var mActivity: LoginActivity
@@ -28,10 +34,17 @@ class SplashFragment : BaseBFragment() {
         BApplication.instance.component.inject(this)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
     override fun init() {
         if (!isAdded) return
         if (activity is LoginActivity)
             mActivity = activity as LoginActivity
+
+        KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
 
         mActivity.hideToolbar()
 

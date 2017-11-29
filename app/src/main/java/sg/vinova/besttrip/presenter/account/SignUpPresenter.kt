@@ -1,4 +1,4 @@
-package sg.vinova.besttrip.presenter
+package sg.vinova.besttrip.presenter.account
 
 import android.content.Context
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import sg.vinova.besttrip.base.BaseBPresenter
-import sg.vinova.besttrip.ui.fragments.SignUpFragment
+import sg.vinova.besttrip.ui.fragments.account.SignUpFragment
 import sg.vinova.besttrip.utils.FirebaseUtils
 import javax.inject.Inject
 
@@ -20,16 +20,15 @@ class SignUpPresenter @Inject constructor(private var context: Context) : BaseBP
                 Flowable.just("")
                         .subscribeOn(Schedulers.computation())
                         .map {
-                            FirebaseUtils.newInstance(context)
-                                    .signUpWithEmail(email, password)
+                            FirebaseUtils.signUpWithEmail(email, password)
                         }
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ task ->
-                            if (task.isComplete) {
+                        .subscribe({ authTask ->
+                            authTask.addOnCompleteListener({ task ->
                                 task.result.user.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(username).build())
                                 weakReference!!.get()!!.signUpSuccess()
-                            } else
-                                task.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
+                            })
+                            authTask.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
         )
     }

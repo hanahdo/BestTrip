@@ -1,13 +1,11 @@
-package sg.vinova.besttrip.presenter
+package sg.vinova.besttrip.presenter.account
 
 import android.content.Context
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import sg.vinova.besttrip.base.BaseBPresenter
-import sg.vinova.besttrip.ui.fragments.LoginFragment
+import sg.vinova.besttrip.ui.fragments.account.LoginFragment
 import sg.vinova.besttrip.utils.FirebaseUtils
 import javax.inject.Inject
 
@@ -22,17 +20,12 @@ class LoginPresenter @Inject constructor(private var context: Context) : BaseBPr
                 Flowable.just("")
                         .subscribeOn(Schedulers.computation())
                         .map {
-                            FirebaseUtils.newInstance(context)
-                                    .loginWithEmail(email, password)
+                            FirebaseUtils.loginWithEmail(email, password)
                         }
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ task ->
-                            if (task.isComplete)
-                                task.addOnCompleteListener({
-                                    weakReference!!.get()!!.loginSuccess()
-                                })
-                            else
-                                task.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
+                        .subscribe({ authTask ->
+                            authTask.addOnCompleteListener({ task -> weakReference!!.get()!!.loginSuccess(task.result.user.uid) })
+                            authTask.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
         )
     }

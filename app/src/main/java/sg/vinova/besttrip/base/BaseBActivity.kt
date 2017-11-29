@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
+import sg.vinova.besttrip.R
 
 /**
  * Created by hanah on 11/22/17.
@@ -32,6 +33,7 @@ abstract class BaseBActivity : AppCompatActivity() {
                 fragmentManager.popBackStackImmediate()
             }
         }
+        fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left);
         fragmentTransaction.replace(replaceFragmentId(), fragment, fragment.javaClass.simpleName)
         if (addBackStack) {
             fragmentTransaction.addToBackStack(fragment.javaClass.simpleName)
@@ -41,6 +43,7 @@ abstract class BaseBActivity : AppCompatActivity() {
 
     open fun replaceFragment(fragment: BaseBFragment, containerId: Int) {
         val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         fragmentTransaction.replace(containerId, fragment, fragment.javaClass.simpleName)
         fragmentTransaction.commitAllowingStateLoss()
     }

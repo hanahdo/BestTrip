@@ -1,14 +1,16 @@
-package sg.vinova.besttrip.ui.fragments
+package sg.vinova.besttrip.ui.fragments.account
 
 import android.text.TextUtils
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_forgot.*
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
-import sg.vinova.besttrip.ui.activities.LoginActivity
-import sg.vinova.besttrip.presenter.ForgotPresenter
+import sg.vinova.besttrip.presenter.account.ForgotPresenter
 import sg.vinova.besttrip.services.BaseListener
+import sg.vinova.besttrip.ui.activities.LoginActivity
+import sg.vinova.besttrip.utils.KeyboardUtils
 import sg.vinova.besttrip.widgets.dialogs.BDialog
 import javax.inject.Inject
 
@@ -33,6 +35,8 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
         if (!isAdded) return
         if (activity is LoginActivity)
             mActivity = activity as LoginActivity
+
+        KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
 
         mActivity.showToolbar()
         mActivity.setLeftIcon(R.drawable.back)
@@ -74,6 +78,7 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
     }
 
     fun forgotSuccess() {
+        Toast.makeText(context, "Check your mailbox to change your password.", Toast.LENGTH_SHORT).show();
         if (!TextUtils.isEmpty(email))
             changeFragment(LoginFragment.newInstance(email), false)
         changeFragment(LoginFragment.newInstance(), false)

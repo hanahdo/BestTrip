@@ -45,7 +45,7 @@ android {
             applicationIdSuffix ".debug"
             resValue("string", "API_key", "AIzaSyBnLvgh2tH-5GYLlfRgOWaibr7TCdKNd_c")
             buildConfigField("boolean", "isLog", 'true')
-            buildConfigField("String", "BASE_URL", 'https://maps.googleapis.com/maps/api/place/')
+            buildConfigField("String", "BASE_URL", '"https://maps.googleapis.com/maps/api/place/"')
             debuggable true
         }
         release {
@@ -54,7 +54,7 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             resValue("string", "API_key", "AIzaSyBnLvgh2tH-5GYLlfRgOWaibr7TCdKNd_c")
             buildConfigField("boolean", "isLog", 'true')
-            buildConfigField("String", "BASE_URL", 'https://maps.googleapis.com/maps/api/place/')
+            buildConfigField("String", "BASE_URL", '"https://maps.googleapis.com/maps/api/place/"')
             signingConfig signingConfigs.debug
             applicationIdSuffix ".release"
         }
@@ -80,6 +80,8 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.1"
     //Views
     implementation "com.android.support:recyclerview-v7:27.0.1"
+    //Anko
+    implementation "org.jetbrains.anko:anko:$rootProject.ankoVersion"
     // Dagger 2
     kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
     implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
@@ -105,3 +107,8 @@ dependencies {
 
 
 apply plugin: "com.google.gms.google-services"
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}

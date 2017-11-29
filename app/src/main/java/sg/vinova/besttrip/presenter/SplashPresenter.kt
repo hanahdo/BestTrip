@@ -2,12 +2,8 @@ package sg.vinova.besttrip.presenter
 
 import android.content.Context
 import android.text.TextUtils
-import com.google.android.gms.tasks.OnCompleteListener
 import io.reactivex.Flowable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.BiConsumer
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import sg.vinova.besttrip.base.BaseBPresenter
 import sg.vinova.besttrip.ui.fragments.SplashFragment
@@ -27,15 +23,12 @@ class SplashPresenter @Inject constructor(private var context: Context) : BaseBP
                 Flowable.just("")
                         .subscribeOn(Schedulers.computation())
                         .map {
-                            FirebaseUtils.newInstance(context)
-                                    .loginWithCustomToken(token!!)
+                            FirebaseUtils.loginWithCustomToken(token!!)
                         }
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ task ->
-                            if (task.isComplete)
-                                weakReference!!.get()!!.loginSuccess()
-                            else
-                                task.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
+                        .subscribe({ authTask ->
+                            authTask.addOnCompleteListener({ weakReference!!.get()!!.loginSuccess() })
+                            authTask.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
         )
     }

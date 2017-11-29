@@ -1,12 +1,11 @@
-package sg.vinova.besttrip.presenter
+package sg.vinova.besttrip.presenter.account
 
 import android.content.Context
-import com.google.firebase.auth.UserProfileChangeRequest
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import sg.vinova.besttrip.base.BaseBPresenter
-import sg.vinova.besttrip.ui.fragments.ForgotFragment
+import sg.vinova.besttrip.ui.fragments.account.ForgotFragment
 import sg.vinova.besttrip.utils.FirebaseUtils
 import javax.inject.Inject
 
@@ -19,15 +18,12 @@ class ForgotPresenter @Inject constructor(private var context: Context) : BaseBP
                 Flowable.just("")
                         .subscribeOn(Schedulers.computation())
                         .map {
-                            FirebaseUtils.newInstance(context)
-                                    .forgotPassword(email)
+                            FirebaseUtils.forgotPassword(email)
                         }
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ task ->
-                            if (task.isComplete) {
-                                weakReference!!.get()!!.forgotSuccess()
-                            } else
-                                task.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
+                        .subscribe({ authTask ->
+                            authTask.addOnCompleteListener({ weakReference!!.get()!!.forgotSuccess() })
+                            authTask.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
         )
     }

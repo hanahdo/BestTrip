@@ -8,6 +8,9 @@ import sg.vinova.besttrip.dagger.module.BModule
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.ui.fragments.*
+import sg.vinova.besttrip.ui.fragments.account.ForgotFragment
+import sg.vinova.besttrip.ui.fragments.account.LoginFragment
+import sg.vinova.besttrip.ui.fragments.account.SignUpFragment
 import javax.inject.Singleton
 
 /**

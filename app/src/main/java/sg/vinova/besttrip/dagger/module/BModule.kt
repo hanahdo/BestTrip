@@ -16,8 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.BuildConfig
 import sg.vinova.besttrip.library.BApi
-import sg.vinova.besttrip.library.Constant.Companion.MAX_TRY_COUNT
-import sg.vinova.besttrip.library.Constant.Companion.RETRY_BACKOFF_DELAY
+import sg.vinova.besttrip.library.Constant.MAX_TRY_COUNT
+import sg.vinova.besttrip.library.Constant.RETRY_BACKOFF_DELAY
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 

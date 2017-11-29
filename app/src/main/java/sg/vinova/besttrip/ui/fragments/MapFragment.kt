@@ -4,11 +4,13 @@ import android.view.View
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import kotlinx.android.synthetic.main.fragment_map.*
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.presenter.MapPresenter
 import sg.vinova.besttrip.ui.activities.MapActivity
+import sg.vinova.besttrip.utils.KeyboardUtils
 import javax.inject.Inject
 
 /**
@@ -35,6 +37,8 @@ class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback {
         if (!isAdded) return
         if (activity is MapActivity)
             mActivity = activity as MapActivity
+
+        KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
 
         if (mapFragment == null)
             mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?

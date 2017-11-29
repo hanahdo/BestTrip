@@ -1,4 +1,4 @@
-package sg.vinova.besttrip.ui.fragments
+package sg.vinova.besttrip.ui.fragments.account
 
 import android.text.TextUtils
 import android.view.View
@@ -6,9 +6,11 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
-import sg.vinova.besttrip.presenter.LoginPresenter
+import sg.vinova.besttrip.presenter.account.LoginPresenter
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
+import sg.vinova.besttrip.utils.KeyboardUtils
+import sg.vinova.besttrip.utils.SharedPreferencesUtils
 import sg.vinova.besttrip.widgets.dialogs.BDialog
 import javax.inject.Inject
 
@@ -37,8 +39,11 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
 
     override fun init() {
         if (!isAdded) return
+
         if (activity is LoginActivity)
             mActivity = activity as LoginActivity
+
+        KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
 
         mActivity.showToolbar()
 
@@ -93,7 +98,8 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
         }
     }
 
-    fun loginSuccess() {
+    fun loginSuccess(uid: String) {
+        SharedPreferencesUtils.newInstance(context!!).setToken(uid);
         changeActivity(MapActivity::class.java)
     }
 
