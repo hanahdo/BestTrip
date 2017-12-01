@@ -8,7 +8,7 @@ import java.util.*
 /**
  * Created by Hanah on 11/22/2017.
  */
-abstract class BaseBAdapter<DATA, VH : RecyclerView.ViewHolder>(private var context: Context) : RecyclerView.Adapter<VH>() {
+open class BaseBAdapter<DATA, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
     private var list = ArrayList<DATA>()
     var lastPosition = -1
 
@@ -20,8 +20,6 @@ abstract class BaseBAdapter<DATA, VH : RecyclerView.ViewHolder>(private var cont
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): VH? {
         return null
     }
-
-    abstract fun getLayoutId(): Int
 
     fun add(data: DATA?) {
         if (data == null)
@@ -68,7 +66,7 @@ abstract class BaseBAdapter<DATA, VH : RecyclerView.ViewHolder>(private var cont
         notifyDataSetChanged()
     }
 
-    fun getItemAt(position: Int): DATA {
+    open fun getItemAt(position: Int): DATA {
         var d: DATA? = null
         if (position in 0..(itemCount - 1)) {
             d = list[position]

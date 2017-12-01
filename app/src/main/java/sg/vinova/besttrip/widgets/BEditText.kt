@@ -65,7 +65,7 @@ class BEditText : EditText {
          */
         background =
                 if (typedArray.getDrawable(R.styleable.BEditText_bBackground) == null)
-                    resources.getDrawable(R.drawable.bg_b_edit_text, context.theme)
+                    resources.getDrawable(R.drawable.bg_b_edit_text, null)
                 else typedArray.getDrawable(R.styleable.BEditText_bBackground)
 
         /**

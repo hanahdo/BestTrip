@@ -24,5 +24,7 @@
     <string name="message">message</string>
     <string name="ok">OK</string>
     <string name="error">Error</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
 
 </resources>

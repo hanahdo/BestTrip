@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
  */
 class BaseObjectResponse {
     @SerializedName("results")
-    var results: List<Result>? = null
+    var results: ArrayList<Result>? = null
     @SerializedName("status")
     @Expose
     var status: String? = null
