@@ -96,6 +96,7 @@ dependencies {
     //Views
     implementation "com.android.support:recyclerview-v7:$support_library_version"
     implementation "com.android.support:design:$support_library_version"
+    implementation "de.hdodenhof:circleimageview:2.2.0"
 
     //Anko
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
@@ -127,7 +128,6 @@ dependencies {
     implementation "com.google.android.gms:play-services-maps:$firebase_version"
     implementation "com.google.android.gms:play-services-places:$firebase_version"
     implementation "com.google.android.gms:play-services-nearby:$firebase_version"
-
 }
 
 

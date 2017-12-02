@@ -1,39 +1,56 @@
 package sg.vinova.besttrip.ui.activities
 
+import android.support.v4.widget.DrawerLayout
+import android.view.Gravity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_login.*
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBActivity
 import sg.vinova.besttrip.services.BaseListener
+import sg.vinova.besttrip.ui.fragments.MapFragment
 import sg.vinova.besttrip.ui.fragments.MenuFragment
-import sg.vinova.besttrip.widgets.dialogs.BSubmitDialog
 
 
 /**
  * Created by Hanah on 11/23/2017.
  */
-class MapActivity : BaseBActivity() {
+class MapActivity : BaseBActivity(), DrawerLayout.DrawerListener {
+    override fun onDrawerStateChanged(newState: Int) {
+
+    }
+
+    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+
+    }
+
+    override fun onDrawerClosed(drawerView: View) {
+        fragmentContainer.isEnabled = true
+    }
+
+    override fun onDrawerOpened(drawerView: View) {
+        fragmentContainer.isEnabled = false
+    }
+
     override fun replaceFragmentId(): Int = R.id.fragmentContainer
 
     override fun getLayoutId(): Int = R.layout.activity_login
 
     override fun init() {
         setActionBar(toolbar)
-//        changeFragment(MapFragment.newInstance(), false)
+        changeFragment(MapFragment.newInstance(), false)
         replaceFragment(MenuFragment.newInstance(), R.id.leftContainer)
         requestLocationPermission()
-    }
 
-    override fun onBackPressed() {
-        if (isTaskRoot) {
-            BSubmitDialog(this).show()
-        } else {
-            super.onBackPressed()
-        }
+        drawer.addDrawerListener(this)
     }
 
     private fun requestLocationPermission() {
 
+    }
+
+    fun showMenu() {
+        if (drawer == null) return
+        drawer.openDrawer(Gravity.START)
     }
 
     fun setTitle(string: String) {

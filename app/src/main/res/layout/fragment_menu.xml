@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -15,11 +16,14 @@
         android:gravity="bottom"
         android:paddingStart="@dimen/default_padding">
 
-        <sg.vinova.besttrip.widgets.CircleImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivAvatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/default_padding_small" />
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:padding="@dimen/default_padding_small"
+            android:src="@drawable/avatar_placeholder"
+            app:civ_border_color="@color/transparent"
+            app:civ_border_width="0.5dp" />
 
         <TextView
             android:id="@+id/tvUsername"
@@ -47,17 +51,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2.5"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/default_padding">
+        android:orientation="vertical">
 
-        <TextView
+        <sg.vinova.besttrip.widgets.BTextView
             android:id="@+id/tvHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/default_padding_bigger"
             android:text="@string/home"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            app:bBackground="@color/background"
+            app:bFontColor="@color/white"
+            app:bTextAlign="Left" />
 
         <TextView
             android:id="@+id/tvListTaxi"

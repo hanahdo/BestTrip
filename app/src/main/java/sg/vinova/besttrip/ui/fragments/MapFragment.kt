@@ -7,22 +7,33 @@ import android.view.View
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_map.*
+import org.jetbrains.anko.design.snackbar
+import org.json.JSONArray
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.adapter.SearchAdapter
 import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.model.search.Result
 import sg.vinova.besttrip.presenter.MapPresenter
+import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.utils.KeyboardUtils
-import sg.vinova.besttrip.widgets.dialogs.BErrorDialog
 import javax.inject.Inject
 
 /**
  * Created by Hanah on 11/27/2017.
  */
-class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, TextWatcher {
+class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, TextWatcher, BaseListener.OnToolbarClickListener {
+    override fun onLeftClick() {
+        mActivity.showMenu()
+    }
+
+    override fun onRightClick() {
+
+    }
+
     private lateinit var mActivity: MapActivity
 
     @Inject lateinit var presenter: MapPresenter
@@ -46,6 +57,9 @@ class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, T
             mActivity = activity as MapActivity
 
         KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
+
+        mActivity.setToolbarListener(this)
+        mActivity.setLeftIcon(R.id.drawer)
 
         if (mapFragment == null)
             mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
@@ -87,7 +101,7 @@ class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, T
 
     override fun afterTextChanged(p0: Editable?) {
         if (p0.isNullOrEmpty()) return
-        presenter.getLocationList(p0!!.toString())
+        presenter.getLocationList(p0.toString())
     }
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -101,7 +115,7 @@ class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, T
         adapter!!.addAll(results!!)
     }
 
-    fun error() {
-        BErrorDialog(context).setMessage("Nothing to show")!!.show()
+    fun error(status: String?) {
+        snackbar(view!!, status!!)
     }
 }

@@ -99,9 +99,8 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
         }
     }
 
-    fun loginSuccess(uid: String) {
+    fun loginSuccess() {
         LogUtils.bInfo("Login Success with email: $email")
-        SharedPreferencesUtils.newInstance(context!!).setToken(uid);
         changeActivity(MapActivity::class.java)
     }
 

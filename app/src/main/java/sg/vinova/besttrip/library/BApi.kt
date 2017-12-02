@@ -1,11 +1,8 @@
 package sg.vinova.besttrip.library
 
-import android.content.res.Resources
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
-import sg.vinova.besttrip.BuildConfig
-import sg.vinova.besttrip.R
 import sg.vinova.besttrip.model.search.BaseObjectResponse
 
 /**
@@ -15,7 +12,7 @@ interface BApi {
     companion object {
         const val textS = "textsearch/"
         const val nearbyS = "nearbysearch/"
-        var ApiKey = Resources.getSystem().getString(R.string.API_key)
+        var ApiKey = "AIzaSyBvv2dY3Eiq_eBGxLdO6OLvFQnR1yYYG6E"
     }
 
     @GET(textS + "json")

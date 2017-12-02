@@ -3,6 +3,7 @@ package sg.vinova.besttrip.utils
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 /**
  * Created by Hanah on 11/23/2017.
@@ -24,5 +25,13 @@ object FirebaseUtils {
 
     fun forgotPassword(email: String): Task<Void> {
         return mAuth.sendPasswordResetEmail(email)
+    }
+
+    fun logout() {
+        return mAuth.signOut()
+    }
+
+    fun getCurrentUser(): FirebaseUser? {
+        return mAuth.currentUser
     }
 }

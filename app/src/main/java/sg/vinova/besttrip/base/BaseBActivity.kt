@@ -1,11 +1,14 @@
 package sg.vinova.besttrip.base
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import sg.vinova.besttrip.R
+import sg.vinova.besttrip.widgets.dialogs.BSubmitDialog
 
 /**
  * Created by hanah on 11/22/17.
@@ -22,6 +25,15 @@ abstract class BaseBActivity : AppCompatActivity() {
     abstract fun getLayoutId(): Int
 
     abstract fun init()
+
+    override fun onBackPressed() {
+        if (isTaskRoot)
+            BSubmitDialog(this).show().apply {
+                DialogInterface.OnCancelListener { getBaseActivity().finish() }
+            }
+        else
+            super.onBackPressed()
+    }
 
     open fun changeFragment(fragment: BaseBFragment, addBackStack: Boolean) {
         val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()

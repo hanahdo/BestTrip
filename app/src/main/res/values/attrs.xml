@@ -22,6 +22,7 @@
     <!-- Text -->
     <attr name="bText" format="string" />
 
+
     <!-- App TextView -->
     <declare-styleable name="BTextView">
         <attr name="bFont" />
@@ -54,14 +55,5 @@
         <attr name="bBackground" />
         <attr name="bTextAlign" />
         <attr name="bHint" format="string" />
-    </declare-styleable>
-
-    <!-- App Circle ImageView-->
-    <declare-styleable name="CircleImageView">
-        <attr name="civ_border_width" format="dimension" />
-        <attr name="civ_border_color" format="color" />
-        <attr name="civ_border_overlay" format="boolean" />
-        <attr name="civ_circle_background_color" format="color" />
-        <attr name="civ_fill_color" format="color" />
     </declare-styleable>
 </resources>

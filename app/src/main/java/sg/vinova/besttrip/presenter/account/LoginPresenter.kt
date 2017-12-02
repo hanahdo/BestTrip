@@ -24,7 +24,7 @@ class LoginPresenter @Inject constructor(private var context: Context) : BaseBPr
                         }
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({ authTask ->
-                            authTask.addOnCompleteListener({ task -> weakReference!!.get()!!.loginSuccess(task.result.user.uid) })
+                            authTask.addOnCompleteListener({ task -> weakReference!!.get()!!.loginSuccess() })
                             authTask.addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
         )

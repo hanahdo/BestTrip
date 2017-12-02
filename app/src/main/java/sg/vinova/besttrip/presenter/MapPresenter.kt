@@ -2,7 +2,6 @@ package sg.vinova.besttrip.presenter
 
 import android.content.Context
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import sg.vinova.besttrip.base.BaseBPresenter
 import sg.vinova.besttrip.ui.fragments.MapFragment
@@ -22,7 +21,7 @@ class MapPresenter @Inject constructor(private var context: Context) : BaseBPres
                     if (baseObject.status == "OK" || baseObject.results!!.isNotEmpty()){
                         weakReference!!.get()!!.getSuccess(baseObject.results)
                     } else{
-                        weakReference!!.get()!!.error()
+                        weakReference!!.get()!!.error(baseObject.status)
                     }
                 }))
     }
