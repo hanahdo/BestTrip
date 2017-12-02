@@ -10,8 +10,9 @@ import sg.vinova.besttrip.presenter.account.LoginPresenter
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.utils.KeyboardUtils
+import sg.vinova.besttrip.utils.LogUtils
 import sg.vinova.besttrip.utils.SharedPreferencesUtils
-import sg.vinova.besttrip.widgets.dialogs.BDialog
+import sg.vinova.besttrip.widgets.dialogs.BErrorDialog
 import javax.inject.Inject
 
 /**
@@ -99,11 +100,12 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
     }
 
     fun loginSuccess(uid: String) {
+        LogUtils.bInfo("Login Success with email: $email")
         SharedPreferencesUtils.newInstance(context!!).setToken(uid);
         changeActivity(MapActivity::class.java)
     }
 
     fun error(error: String?) {
-        BDialog(context).setMessage(error)!!.show()
+        BErrorDialog(context).setMessage(error)!!.show()
     }
 }

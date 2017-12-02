@@ -75,6 +75,8 @@ class BTextView : TextView {
         background =
                 if (typedArray.getDrawable(R.styleable.BTextView_bBackground) == null) null
                 else typedArray.getDrawable(R.styleable.BTextView_bBackground)
+
+        typedArray.recycle()
     }
 
     private fun setFont(context: Context, fontFamily: String?) {

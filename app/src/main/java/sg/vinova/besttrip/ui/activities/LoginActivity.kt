@@ -7,6 +7,7 @@ import sg.vinova.besttrip.base.BaseBActivity
 import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.fragments.MenuFragment
 import sg.vinova.besttrip.ui.fragments.SplashFragment
+import sg.vinova.besttrip.widgets.dialogs.BSubmitDialog
 
 /**
  * Created by Hanah on 11/22/2017.
@@ -20,6 +21,14 @@ class LoginActivity : BaseBActivity() {
         setActionBar(toolbar)
         changeFragment(SplashFragment.newInstance(), false)
         replaceFragment(MenuFragment.newInstance(), R.id.leftContainer)
+    }
+
+    override fun onBackPressed() {
+        if (isTaskRoot) {
+            BSubmitDialog(this).show()
+        } else {
+            super.onBackPressed()
+        }
     }
 
     fun setTitle(string: String) {

@@ -60,6 +60,8 @@ class BToolbar : Toolbar {
             else -> resources.getString(R.string.roboto_regular)
         }
         setFont(context, fontFamily)
+
+        typedArray.recycle()
     }
 
     private fun setFont(context: Context, fontFamily: String?) {

@@ -1,7 +1,6 @@
 package sg.vinova.besttrip.ui.fragments
 
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -17,7 +16,7 @@ import sg.vinova.besttrip.model.search.Result
 import sg.vinova.besttrip.presenter.MapPresenter
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.utils.KeyboardUtils
-import sg.vinova.besttrip.widgets.dialogs.BDialog
+import sg.vinova.besttrip.widgets.dialogs.BErrorDialog
 import javax.inject.Inject
 
 /**
@@ -103,6 +102,6 @@ class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, T
     }
 
     fun error() {
-        BDialog(context).setMessage("Nothing to show")!!.show()
+        BErrorDialog(context).setMessage("Nothing to show")!!.show()
     }
 }

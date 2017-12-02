@@ -2,15 +2,16 @@ package sg.vinova.besttrip.ui.fragments.account
 
 import android.text.TextUtils
 import android.view.View
-import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import org.jetbrains.anko.design.snackbar
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.presenter.account.SignUpPresenter
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.utils.KeyboardUtils
-import sg.vinova.besttrip.widgets.dialogs.BDialog
+import sg.vinova.besttrip.utils.LogUtils
+import sg.vinova.besttrip.widgets.dialogs.BErrorDialog
 import javax.inject.Inject
 
 /**
@@ -93,13 +94,15 @@ class SignUpFragment : BaseBFragment(), View.OnClickListener {
     }
 
     fun signUpSuccess() {
-        Toast.makeText(context, "Sign up success.", Toast.LENGTH_SHORT).show();
+        LogUtils.bInfo("Login Success")
+        snackbar(this.view!!, "Your have sign up successful with email: ${email}, now you can login!!")
         if (!TextUtils.isEmpty(email))
             changeFragment(LoginFragment.newInstance(email), false)
         changeFragment(LoginFragment.newInstance(), false)
     }
 
     fun error(error: String?) {
-        BDialog(context).setMessage(error)!!.show()
+        LogUtils.bError(error!!)
+        BErrorDialog(context).setMessage(error)!!.show()
     }
 }

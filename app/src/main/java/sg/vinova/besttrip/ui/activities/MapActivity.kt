@@ -1,14 +1,13 @@
 package sg.vinova.besttrip.ui.activities
 
-import android.content.pm.PackageManager
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
 import android.view.View
 import kotlinx.android.synthetic.main.activity_login.*
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBActivity
 import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.fragments.MenuFragment
+import sg.vinova.besttrip.widgets.dialogs.BSubmitDialog
+
 
 /**
  * Created by Hanah on 11/23/2017.
@@ -23,6 +22,14 @@ class MapActivity : BaseBActivity() {
 //        changeFragment(MapFragment.newInstance(), false)
         replaceFragment(MenuFragment.newInstance(), R.id.leftContainer)
         requestLocationPermission()
+    }
+
+    override fun onBackPressed() {
+        if (isTaskRoot) {
+            BSubmitDialog(this).show()
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun requestLocationPermission() {

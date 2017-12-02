@@ -81,6 +81,8 @@ class BButton : Button {
          * Disable all caps text in button
          */
         setAllCaps(false)
+
+        typedArray.recycle()
     }
 
     private fun setFont(context: Context, fontFamily: String?) {

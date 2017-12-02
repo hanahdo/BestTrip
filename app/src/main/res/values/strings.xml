@@ -26,5 +26,10 @@
     <string name="error">Error</string>
     <string name="name">Name</string>
     <string name="address">Address</string>
+    <string name="exit_message">Are you sure to exit?</string>
+    <string name="exit">Exit BestTrip</string>
+    <string name="home">Home</string>
+    <string name="taxi_fare_charges"><![CDATA[Taxi Fare & Charges]]></string>
+    <string name="logout">Logout</string>
 
 </resources>

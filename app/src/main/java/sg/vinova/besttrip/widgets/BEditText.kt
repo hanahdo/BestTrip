@@ -89,7 +89,7 @@ class BEditText : EditText {
                 else typedArray.getString(R.styleable.BEditText_bHint)
         setHintTextColor(typedArray.getColor(R.styleable.BEditText_bFontColor, fontColor))
 
-
+        typedArray.recycle()
     }
 
     private fun setFont(context: Context, fontFamily: String?) {

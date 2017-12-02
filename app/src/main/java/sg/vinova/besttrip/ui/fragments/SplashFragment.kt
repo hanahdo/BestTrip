@@ -11,9 +11,9 @@ import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.ui.fragments.account.LoginFragment
 import sg.vinova.besttrip.utils.KeyboardUtils
-import sg.vinova.besttrip.widgets.dialogs.BDialog
+import sg.vinova.besttrip.utils.LogUtils
+import sg.vinova.besttrip.widgets.dialogs.BErrorDialog
 import javax.inject.Inject
-import org.jetbrains.anko.*
 
 /**
  * Created by Hanah on 11/22/2017.
@@ -56,10 +56,12 @@ class SplashFragment : BaseBFragment() {
     override fun unbindPresenter() = presenter.unbind()
 
     fun error(error: String?) {
-        BDialog(context).setMessage(error)!!.show()
+        LogUtils.bError(error!!)
+        BErrorDialog(context).setMessage(error)!!.show()
     }
 
     fun loginSuccess() {
+        LogUtils.bInfo("Login Success")
         changeActivity(MapActivity::class.java)
     }
 
