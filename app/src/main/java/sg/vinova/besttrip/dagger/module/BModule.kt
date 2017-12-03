@@ -1,13 +1,15 @@
 package sg.vinova.besttrip.dagger.module
 
 import android.os.Handler
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.places.Places
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
@@ -20,6 +22,7 @@ import sg.vinova.besttrip.library.Constant.MAX_TRY_COUNT
 import sg.vinova.besttrip.library.Constant.RETRY_BACKOFF_DELAY
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 
 /**
  * Created by hanah on 11/22/17.
@@ -61,7 +64,7 @@ class BModule(private val app: BApplication) {
     @Provides
     fun getOkHttpClient(): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
-        httpClient.addInterceptor(Interceptor { chain ->
+        httpClient.addInterceptor({ chain ->
             val request = chain.request()
             // try the request
             var response: Response? = null
@@ -104,5 +107,13 @@ class BModule(private val app: BApplication) {
         httpClient.readTimeout((60 * 1000).toLong(), TimeUnit.MILLISECONDS)
         httpClient.connectTimeout((60 * 1000).toLong(), TimeUnit.MILLISECONDS)
         return httpClient.build()
+    }
+
+    @Provides
+    fun getGoogleAPIClient(): GoogleApiClient {
+        return GoogleApiClient.Builder(getContext())
+                .addApi(LocationServices.API)
+                .addApi(Places.GEO_DATA_API)
+                .build()
     }
 }

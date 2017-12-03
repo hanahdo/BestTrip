@@ -1,4 +1,4 @@
-package sg.vinova.besttrip.ui.fragments
+package sg.vinova.besttrip.ui.fragments.result
 
 import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
@@ -7,16 +7,13 @@ import android.view.View
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_map.*
 import org.jetbrains.anko.design.snackbar
-import org.json.JSONArray
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.adapter.SearchAdapter
 import sg.vinova.besttrip.base.BaseBFragment
-import sg.vinova.besttrip.model.search.Result
-import sg.vinova.besttrip.presenter.MapPresenter
+import sg.vinova.besttrip.presenter.result.MapPresenter
 import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.utils.KeyboardUtils

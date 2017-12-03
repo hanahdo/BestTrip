@@ -51,7 +51,7 @@ android {
             applicationIdSuffix ".debug"
             resValue("string", "API_key", "AIzaSyBnLvgh2tH-5GYLlfRgOWaibr7TCdKNd_c")
             buildConfigField("boolean", "isLog", 'true')
-            buildConfigField("String", "BASE_URL", '"https://maps.googleapis.com/maps/api/place/"')
+            buildConfigField("String", "BASE_URL", '"https://maps.googleapis.com/maps/api/"')
             debuggable true
         }
         release {
@@ -60,7 +60,7 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             resValue("string", "API_key", "AIzaSyBnLvgh2tH-5GYLlfRgOWaibr7TCdKNd_c")
             buildConfigField("boolean", "isLog", 'true')
-            buildConfigField("String", "BASE_URL", '"https://maps.googleapis.com/maps/api/place/"')
+            buildConfigField("String", "BASE_URL", '"https://maps.googleapis.com/maps/api/"')
             signingConfig signingConfigs.debug
             applicationIdSuffix ".release"
         }
@@ -128,6 +128,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-maps:$firebase_version"
     implementation "com.google.android.gms:play-services-places:$firebase_version"
     implementation "com.google.android.gms:play-services-nearby:$firebase_version"
+    implementation "com.google.android.gms:play-services-location:$firebase_version"
 }
 
 

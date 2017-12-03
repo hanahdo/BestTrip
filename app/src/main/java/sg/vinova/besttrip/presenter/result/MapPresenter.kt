@@ -1,10 +1,10 @@
-package sg.vinova.besttrip.presenter
+package sg.vinova.besttrip.presenter.result
 
 import android.content.Context
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import sg.vinova.besttrip.base.BaseBPresenter
-import sg.vinova.besttrip.ui.fragments.MapFragment
+import sg.vinova.besttrip.ui.fragments.result.MapFragment
 import sg.vinova.besttrip.usecase.SearchUsecase
 import javax.inject.Inject
 

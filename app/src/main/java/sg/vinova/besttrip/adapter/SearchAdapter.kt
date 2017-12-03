@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import sg.vinova.besttrip.R
 import kotlinx.android.synthetic.main.item_search_places.view.*
 import sg.vinova.besttrip.base.BaseBAdapter
-import sg.vinova.besttrip.model.search.Result
 
 /**
  * Created by hanah on 12/1/17.

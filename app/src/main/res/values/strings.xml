@@ -33,5 +33,7 @@
     <string name="logout">Logout</string>
     <string name="login_now">Login Now</string>
     <string name="guest">Guest</string>
+    <string name="your_location">Your Location</string>
+    <string name="where_you_heading">Where you heading?</string>
 
 </resources>

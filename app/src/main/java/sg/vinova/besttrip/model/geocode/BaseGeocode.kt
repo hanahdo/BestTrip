@@ -1,16 +1,13 @@
-package sg.vinova.besttrip.model.search
+package sg.vinova.besttrip.model.geocode
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-
 /**
- * Created by Hanah on 11/27/2017.
+ * Created by Hanah on 12/3/2017.
  */
-class BaseObjectResponse {
+class BaseGeocode {
     @SerializedName("results")
     var results: ArrayList<Result>? = null
     @SerializedName("status")
-    @Expose
     var status: String? = null
 }

@@ -9,10 +9,10 @@ import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.presenter.MenuPresenter
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
+import sg.vinova.besttrip.ui.fragments.result.MapFragment
 import sg.vinova.besttrip.utils.FirebaseUtils
 import sg.vinova.besttrip.utils.GlideUtils
 import sg.vinova.besttrip.utils.LogUtils
-import sg.vinova.besttrip.utils.SharedPreferencesUtils
 import sg.vinova.besttrip.widgets.dialogs.BErrorDialog
 import javax.inject.Inject
 

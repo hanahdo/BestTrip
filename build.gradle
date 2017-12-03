@@ -20,16 +20,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'https://jitpack.io' }
     }
-}
-
-ext {
-    firebaseVersion = '11.6.0'
-    daggerVersion = '2.11'
-    glideVersion = '4.2.0'
-    retrofitVersion = '2.3.0'
-    ankoVersion = '0.10.3'
 }
 
 task clean(type: Delete) {
