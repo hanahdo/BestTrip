@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="@dimen/default_padding">
 
     <sg.vinova.besttrip.widgets.BTextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/name"
-        app:bFont="RobotoMedium"
-        app:bFontColor="@color/dark_background"
+        android:text="@string/address"
+        app:bFont="RobotoLight"
+        app:bFontColor="@color/background"
         app:bTextAlign="Left" />
 
     <sg.vinova.besttrip.widgets.BTextView
-        android:id="@+id/tvAddress"
+        android:id="@+id/tvDistance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/address"

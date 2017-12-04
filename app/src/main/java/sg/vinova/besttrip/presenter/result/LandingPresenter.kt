@@ -9,6 +9,7 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.OnFailureListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import sg.vinova.besttrip.base.BaseBPresenter
@@ -39,7 +40,7 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) return
             LocationServices.getFusedLocationProviderClient(context).lastLocation.addOnSuccessListener({ location ->
                 weakReference!!.get()!!.getLocationSuccess(location)
-            })
+            }).addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
         }
     }
 
@@ -54,7 +55,8 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
                 .subscribeOn(Schedulers.single())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ geocode ->
-                    weakReference!!.get()!!.getGeocodeSuccess(geocode.results!![0].address)
+                    if (geocode.results != null && geocode.results!!.isNotEmpty())
+                        weakReference!!.get()!!.getGeocodeSuccess(geocode.results!![0].address)
                 }))
     }
 

@@ -15,6 +15,7 @@ interface BApi {
         const val autocomplete = "autocomplete/"
         const val geocode = "geocode/"
         const val directions = "directions/"
+        const val nearby = "nearbysearch/"
         var ApiKey = "AIzaSyBvv2dY3Eiq_eBGxLdO6OLvFQnR1yYYG6E"
     }
 

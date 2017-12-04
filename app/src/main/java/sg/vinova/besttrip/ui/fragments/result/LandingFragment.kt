@@ -6,6 +6,8 @@ import android.view.View
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import kotlinx.android.synthetic.main.fragment_landing.*
+import kotlinx.android.synthetic.main.fragment_map.*
+import org.jetbrains.anko.design.snackbar
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
@@ -13,6 +15,7 @@ import sg.vinova.besttrip.model.BLocation
 import sg.vinova.besttrip.model.YourDirection
 import sg.vinova.besttrip.presenter.result.LandingPresenter
 import sg.vinova.besttrip.ui.activities.MapActivity
+import sg.vinova.besttrip.utils.KeyboardUtils
 import sg.vinova.besttrip.utils.LogUtils
 import javax.inject.Inject
 
@@ -38,6 +41,8 @@ class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.C
         if (!isAdded) return
         if (activity is MapActivity)
             mActivity = activity as MapActivity
+
+        KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
 
         if (presenter.checkPlayServices()) {
             mGoogleApiClient.registerConnectionCallbacks(this)
@@ -71,7 +76,7 @@ class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.C
         }
     }
 
-    @Inject private lateinit var mGoogleApiClient: GoogleApiClient
+    @Inject lateinit var mGoogleApiClient: GoogleApiClient
 
     override fun onConnected(p0: Bundle?) {
         presenter.getMyLocation(mGoogleApiClient)
@@ -82,14 +87,14 @@ class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.C
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
-        LogUtils.bError("Connection failed: ${p0.errorCode} - ${p0.errorMessage}")
+        LogUtils.bError(this.javaClass, "Connection failed: ${p0.errorCode} - ${p0.errorMessage}")
     }
 
     private var direction: YourDirection = YourDirection()
     private var yourLocation: BLocation = BLocation()
 
     fun getLocationSuccess(location: Location) {
-        LogUtils.bInfo("Your location is: ${location.latitude}, ${location.longitude}")
+        LogUtils.bInfo(this.javaClass, "Your location is: ${location.latitude}, ${location.longitude}")
         yourLocation.lat = location.latitude
         yourLocation.long = location.longitude
         direction.myBLocation = yourLocation
@@ -97,6 +102,12 @@ class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.C
     }
 
     fun getGeocodeSuccess(address: String?) {
-        tvYourLocation.text = address!!
+        LogUtils.bInfo(this.javaClass, address!!)
+        tvYourLocation.text = address
+    }
+
+    fun error(localizedMessage: String?) {
+        LogUtils.bError(this.javaClass, localizedMessage!!)
+        snackbar(view!!, localizedMessage)
     }
 }

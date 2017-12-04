@@ -5,6 +5,9 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.widget.DrawerLayout
 import android.view.Gravity
 import android.view.View
+import com.tbruyelle.rxpermissions2.RxPermissions
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_login.*
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBActivity
@@ -13,15 +16,14 @@ import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.fragments.MenuFragment
 import sg.vinova.besttrip.ui.fragments.result.LandingFragment
 import sg.vinova.besttrip.utils.LogUtils
-import sg.vinova.besttrip.utils.PermissionUtils
 
 
 /**
  * Created by Hanah on 11/23/2017.
  */
-class MapActivity : BaseBActivity(), DrawerLayout.DrawerListener, ActivityCompat.OnRequestPermissionsResultCallback, BaseCallback.PermissionResultCallback {
-    private lateinit var permissionUtils: PermissionUtils
-    private var permissions: ArrayList<String> = ArrayList()
+class MapActivity : BaseBActivity(), DrawerLayout.DrawerListener {
+    private lateinit var composite: CompositeDisposable
+    private lateinit var rxPermission: RxPermissions
 
     override fun replaceFragmentId(): Int = R.id.fragmentContainer
 
@@ -29,25 +31,28 @@ class MapActivity : BaseBActivity(), DrawerLayout.DrawerListener, ActivityCompat
 
     override fun init() {
         setActionBar(toolbar)
-        changeFragment(LandingFragment.newInstance(), false)
         replaceFragment(MenuFragment.newInstance(), R.id.leftContainer)
+
+        composite = CompositeDisposable()
+        rxPermission = RxPermissions(this)
         requestLocationPermission()
 
         drawer.addDrawerListener(this)
     }
 
     private fun requestLocationPermission() {
-        permissionUtils = PermissionUtils(applicationContext)
-
-        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
-        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION)
-
-        permissionUtils.checkPermission(permissions, "Need GPS permission for getting your location", 1)
+        composite.add(rxPermission.request(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION).subscribe({ isGranted ->
+            if (isGranted)
+                changeFragment(LandingFragment.newInstance(), false)
+            else
+                requestLocationPermission()
+        }))
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        permissionUtils.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    override fun onDestroy() {
+        super.onDestroy()
+        composite.clear()
+        composite.dispose()
     }
 
     fun showMenu() {
@@ -81,22 +86,6 @@ class MapActivity : BaseBActivity(), DrawerLayout.DrawerListener, ActivityCompat
     fun showToolbar() {
         if (toolbar.visibility == View.GONE)
             toolbar.visibility = View.VISIBLE
-    }
-
-    override fun permissionGranted(requestCode: Int) {
-        LogUtils.bInfo("PERMISSION - GRANTED")
-    }
-
-    override fun partialPermissionGranted(requestCode: Int, grantedPermissions: ArrayList<String>) {
-        LogUtils.bInfo("PERMISSION - PARTIALLY GRANTED")
-    }
-
-    override fun permissionDenied(requestCode: Int) {
-        LogUtils.bInfo("PERMISSION - DENIED")
-    }
-
-    override fun neverAskAgain(requestCode: Int) {
-        LogUtils.bInfo("PERMISSION - NEVER ASK AGAIN")
     }
 
     override fun onDrawerStateChanged(newState: Int) {

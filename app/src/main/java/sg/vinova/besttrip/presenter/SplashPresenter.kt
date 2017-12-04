@@ -15,13 +15,11 @@ import javax.inject.Inject
 class SplashPresenter @Inject constructor(private var context: Context) : BaseBPresenter<SplashFragment>(context) {
     fun checkUserLogin() {
         requestSubscriptions!!.add(
-                Flowable.just("")
+                Flowable.just(" ")
                         .subscribeOn(Schedulers.computation())
-                        .map {
-                            FirebaseUtils.getCurrentUser()
-                        }
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ mUser ->
+                        .subscribe({
+                            val mUser = FirebaseUtils.getCurrentUser()
                             if (mUser != null) weakReference!!.get()!!.loginSuccess()
                             else weakReference!!.get()!!.changeLoginFragment()
                         }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })

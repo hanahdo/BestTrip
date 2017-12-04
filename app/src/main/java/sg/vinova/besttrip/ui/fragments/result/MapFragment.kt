@@ -8,15 +8,18 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import kotlinx.android.synthetic.main.fragment_map.*
+import okio.Utf8
 import org.jetbrains.anko.design.snackbar
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.adapter.SearchAdapter
 import sg.vinova.besttrip.base.BaseBFragment
+import sg.vinova.besttrip.model.autocomplete.Prediction
 import sg.vinova.besttrip.presenter.result.MapPresenter
 import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.utils.KeyboardUtils
+import java.net.URLEncoder
 import javax.inject.Inject
 
 /**
@@ -98,7 +101,7 @@ class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, T
 
     override fun afterTextChanged(p0: Editable?) {
         if (p0.isNullOrEmpty()) return
-        presenter.getLocationList(p0.toString())
+        presenter.getLocationList(URLEncoder.encode(p0!!.toString(), "UTF-8"))
     }
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -107,12 +110,13 @@ class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, T
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
     }
 
-    fun getSuccess(results: ArrayList<Result>?) {
+    fun getSuccess(predictions: ArrayList<Prediction>?) {
         rvSearch.visibility = View.VISIBLE
-        adapter!!.addAll(results!!)
+        adapter!!.addAll(predictions!!)
     }
 
     fun error(status: String?) {
+        KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
         snackbar(view!!, status!!)
     }
 }

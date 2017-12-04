@@ -67,30 +67,31 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
 
         when (v.id) {
             R.id.btnSend -> {
-                LogUtils.bDebug("Send click, email: $email")
+                LogUtils.bDebug(this.javaClass, "Send click, email: $email")
                 if (!TextUtils.isEmpty(email)) presenter.forgotPassword(email)
             }
         }
     }
 
     override fun onLeftClick() {
-        LogUtils.bDebug("On Left Click")
+        LogUtils.bDebug(this.javaClass, "On Left Click")
         mActivity.onBackPressed()
     }
 
     override fun onRightClick() {
-        LogUtils.bDebug("On Right Click")
+        LogUtils.bDebug(this.javaClass, "On Right Click")
     }
 
     fun forgotSuccess() {
         snackbar(this.view!!, "Please check your mailbox to reset your password.")
-        LogUtils.bInfo("An email reset password has sent to ${email}!")
+        LogUtils.bInfo(this.javaClass, "An email reset password has sent to ${email}!")
         if (!TextUtils.isEmpty(email))
             changeFragment(LoginFragment.newInstance(email), false)
         changeFragment(LoginFragment.newInstance(), false)
     }
 
     fun error(error: String?) {
+        LogUtils.bError(this.javaClass, error!!)
         BErrorDialog(context).setMessage(error)!!.show()
     }
 }

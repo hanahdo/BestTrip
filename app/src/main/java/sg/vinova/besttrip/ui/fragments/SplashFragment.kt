@@ -56,12 +56,12 @@ class SplashFragment : BaseBFragment() {
     override fun unbindPresenter() = presenter.unbind()
 
     fun error(error: String?) {
-        LogUtils.bError(error!!)
+        LogUtils.bError(this.javaClass, error!!)
         BErrorDialog(context).setMessage(error)!!.show()
     }
 
     fun loginSuccess() {
-        LogUtils.bInfo("Login Success")
+        LogUtils.bInfo(this.javaClass, "Login Success")
         changeActivity(MapActivity::class.java)
     }
 

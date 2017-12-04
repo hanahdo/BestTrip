@@ -129,6 +129,9 @@ dependencies {
     implementation "com.google.android.gms:play-services-places:$firebase_version"
     implementation "com.google.android.gms:play-services-nearby:$firebase_version"
     implementation "com.google.android.gms:play-services-location:$firebase_version"
+
+    //RxPermission
+    implementation "com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar"
 }
 
 

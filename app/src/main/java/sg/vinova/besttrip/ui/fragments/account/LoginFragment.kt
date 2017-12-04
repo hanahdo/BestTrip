@@ -100,11 +100,12 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
     }
 
     fun loginSuccess() {
-        LogUtils.bInfo("Login Success with email: $email")
+        LogUtils.bInfo(this.javaClass, "Login Success with email: $email")
         changeActivity(MapActivity::class.java)
     }
 
     fun error(error: String?) {
+        LogUtils.bError(this.javaClass, error!!)
         BErrorDialog(context).setMessage(error)!!.show()
     }
 }

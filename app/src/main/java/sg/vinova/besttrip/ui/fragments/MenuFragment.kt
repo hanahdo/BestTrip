@@ -98,12 +98,12 @@ class MenuFragment : BaseBFragment(), View.OnClickListener {
     }
 
     fun logoutSuccess() {
-        LogUtils.bDebug("Logout success")
+        LogUtils.bDebug(this.javaClass, "Logout success")
         changeActivity(LoginActivity::class.java)
     }
 
     fun error(error: String?) {
-        LogUtils.bError(error!!)
+        LogUtils.bError(this.javaClass, error!!)
         BErrorDialog(context).setMessage(error)!!.show()
     }
 }

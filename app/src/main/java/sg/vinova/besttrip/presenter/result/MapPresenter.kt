@@ -18,8 +18,8 @@ class MapPresenter @Inject constructor(private var context: Context) : BaseBPres
                 .subscribeOn(Schedulers.single())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ baseObject ->
-                    if (baseObject.status == "OK" || baseObject.results!!.isNotEmpty()){
-                        weakReference!!.get()!!.getSuccess(baseObject.results)
+                    if (baseObject.status == "OK" || baseObject.prediction!!.isNotEmpty()){
+                        weakReference!!.get()!!.getSuccess(baseObject.prediction)
                     } else{
                         weakReference!!.get()!!.error(baseObject.status)
                     }
