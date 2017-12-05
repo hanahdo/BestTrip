@@ -17,7 +17,7 @@ class MenuPresenter @Inject constructor(context: Context) : BaseBPresenter<MenuF
     fun logout(mAuth: FirebaseAuth) {
         requestSubscriptions!!.add(
                 Observable.just("")
-                        .subscribeOn(Schedulers.single())
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             mAuth.signOut()

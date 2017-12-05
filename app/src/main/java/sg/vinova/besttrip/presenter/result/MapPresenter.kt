@@ -15,7 +15,7 @@ class MapPresenter @Inject constructor(private var context: Context) : BaseBPres
     @Inject lateinit var searchUsecase: SearchUsecase
     fun getLocationList(s: String) {
         requestSubscriptions!!.add(searchUsecase.getAllSearchResult(s)
-                .subscribeOn(Schedulers.single())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ baseObject ->
                     if (baseObject.status == "OK" || baseObject.prediction!!.isNotEmpty()){

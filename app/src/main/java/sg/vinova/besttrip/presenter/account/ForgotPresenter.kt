@@ -16,7 +16,7 @@ class ForgotPresenter @Inject constructor(private var context: Context) : BaseBP
     fun forgotPassword(mAuth: FirebaseAuth, email: String) {
         requestSubscriptions!!.add(
                 Observable.just("")
-                        .subscribeOn(Schedulers.computation())
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             mAuth.sendPasswordResetEmail(email)

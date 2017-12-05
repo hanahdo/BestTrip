@@ -18,7 +18,7 @@ class SignUpPresenter @Inject constructor(private var context: Context) : BaseBP
     fun signUpWithEmail(mAuth: FirebaseAuth, username: String, email: String, password: String) {
         requestSubscriptions!!.add(
                 Observable.just("")
-                        .subscribeOn(Schedulers.computation())
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             mAuth.createUserWithEmailAndPassword(email, password)

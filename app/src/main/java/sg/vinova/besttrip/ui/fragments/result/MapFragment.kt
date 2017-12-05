@@ -25,7 +25,7 @@ import javax.inject.Inject
 /**
  * Created by Hanah on 11/27/2017.
  */
-class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, TextWatcher, BaseListener.OnToolbarClickListener {
+class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, BaseListener.OnToolbarClickListener {
     override fun onLeftClick() {
         mActivity.showMenu()
     }
@@ -58,8 +58,7 @@ class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, T
 
         KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
 
-        mActivity.setToolbarListener(this)
-        mActivity.setLeftIcon(R.id.drawer)
+        mActivity.bToolbar.setLeftIcon(R.id.drawer)
 
         if (mapFragment == null)
             mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
@@ -76,6 +75,7 @@ class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, T
     }
 
     private fun onClick() {
+        mActivity.bToolbar.listener = this
         edtPlaces.setOnClickListener(this)
     }
 
@@ -91,23 +91,23 @@ class MapFragment : BaseBFragment(), View.OnClickListener, OnMapReadyCallback, T
         if (v == null) return
 
         when (v.id) {
-            R.id.edtPlaces -> edtPlaces.addTextChangedListener(this)
+            R.id.edtPlaces -> edtPlaces.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(p0: Editable?) {
+                    if (p0.isNullOrEmpty()) return
+                    presenter.getLocationList(URLEncoder.encode(p0!!.toString(), "UTF-8"))
+                }
+
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+            })
         }
     }
 
     override fun onMapReady(mMap: GoogleMap?) {
         mMap!!.uiSettings.setAllGesturesEnabled(true)
-    }
-
-    override fun afterTextChanged(p0: Editable?) {
-        if (p0.isNullOrEmpty()) return
-        presenter.getLocationList(URLEncoder.encode(p0!!.toString(), "UTF-8"))
-    }
-
-    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-    }
-
-    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
     }
 
     fun getSuccess(predictions: ArrayList<Prediction>?) {

@@ -4,12 +4,12 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.os.Looper
 import android.support.v4.app.ActivityCompat
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.Task
 import io.reactivex.Observable
@@ -29,9 +29,11 @@ import javax.inject.Inject
  */
 class LandingPresenter @Inject constructor(private var context: Context) : BaseBPresenter<LandingFragment>(context) {
     @Inject lateinit var searchUsecase: SearchUsecase
+    lateinit var mLocationRequest: LocationRequest
+    private var lastLocation: Location? = null
 
     fun createLocationRequest(mGoogleApiClient: GoogleApiClient) {
-        val mLocationRequest = LocationRequest.create()
+        mLocationRequest = LocationRequest.create()
         mLocationRequest.interval = UPDATE_INTERVAL_IN_MILLISECONDS
         mLocationRequest.fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
         mLocationRequest.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
@@ -43,27 +45,39 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) return
             requestSubscriptions!!.add(
                     Observable.just("")
-                            .subscribeOn(Schedulers.computation())
+                            .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
                                 LocationServices.getFusedLocationProviderClient(context).lastLocation
-                                        .addOnSuccessListener({ location -> weakReference!!.get()!!.getLocationSuccess(location) })
+                                        .addOnSuccessListener({ location -> if (location != null) lastLocation = location })
                                         .addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
-                            })
+                                if (lastLocation == null)
+                                    LocationServices.getFusedLocationProviderClient(context).requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
+                                else
+                                    weakReference!!.get()!!.getLocationSuccess(lastLocation!!)
+                            }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
             )
 
         }
     }
 
-    fun checkPlayServices(): Boolean {
+    private val mLocationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult?) {
+            locationResult!!.locations
+                    .filterNotNull()
+                    .forEach { weakReference!!.get()!!.getLocationSuccess(it) }
+        }
+    }
+
+    fun checkPlayServices(): Int {
         val googleAPI = GoogleApiAvailability.getInstance()
         val result = googleAPI.isGooglePlayServicesAvailable(context)
-        return result == ConnectionResult.SUCCESS
+        return result
     }
 
     fun getAddress(yourLocation: BLocation) {
         requestSubscriptions!!.add(searchUsecase.getAddress("${yourLocation.lat},${yourLocation.long}")
-                .subscribeOn(Schedulers.single())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ geocode ->
                     if (geocode.results != null && geocode.results!!.isNotEmpty())

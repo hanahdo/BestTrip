@@ -1,12 +1,13 @@
 package sg.vinova.besttrip.ui.fragments.result
 
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.location.Location
 import android.os.Bundle
 import android.view.View
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import kotlinx.android.synthetic.main.fragment_landing.*
-import kotlinx.android.synthetic.main.fragment_map.*
 import org.jetbrains.anko.design.snackbar
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
@@ -14,15 +15,17 @@ import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.model.BLocation
 import sg.vinova.besttrip.model.YourDirection
 import sg.vinova.besttrip.presenter.result.LandingPresenter
+import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.utils.KeyboardUtils
 import sg.vinova.besttrip.utils.LogUtils
+import sg.vinova.besttrip.widgets.dialogs.BErrorDialog
 import javax.inject.Inject
 
 /**
  * Created by Hanah on 12/3/2017.
  */
-class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, BaseListener.OnToolbarClickListener {
     private lateinit var mActivity: MapActivity
 
     @Inject lateinit var presenter: LandingPresenter
@@ -44,18 +47,32 @@ class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.C
 
         KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
 
-        if (presenter.checkPlayServices()) {
+        mActivity.bToolbar.setLeftIcon(R.drawable.drawer)
+
+        if (presenter.checkPlayServices() == ConnectionResult.SUCCESS) {
+            mActivity.showLoading()
             mGoogleApiClient.registerConnectionCallbacks(this)
             mGoogleApiClient.registerConnectionFailedListener(this)
-
             presenter.createLocationRequest(mGoogleApiClient)
+        } else {
+            tvYourLocation.text = ""
+            BErrorDialog(context).setMessage("Error code: ${presenter.checkPlayServices()}")!!.show()
         }
 
         onClick()
     }
 
     private fun onClick() {
+        mActivity.bToolbar.listener = this
         tvDestination.setOnClickListener(this)
+    }
+
+    override fun onLeftClick() {
+        mActivity.showMenu()
+    }
+
+    override fun onRightClick() {
+
     }
 
     override fun bindPresenter() {
@@ -102,8 +119,10 @@ class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.C
     }
 
     fun getGeocodeSuccess(address: String?) {
-        LogUtils.bInfo(this.javaClass, address!!)
+        if (address == null) return
+        LogUtils.bInfo(this.javaClass, address)
         tvYourLocation.text = address
+        mActivity.hideLoading()
     }
 
     fun error(localizedMessage: String?) {

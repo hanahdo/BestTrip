@@ -47,7 +47,7 @@ class SignUpFragment : BaseBFragment(), View.OnClickListener {
         KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
 
         mActivity.showToolbar()
-        mActivity.setLeftIcon(R.drawable.drawer)
+        mActivity.bToolbar.setLeftIcon(R.drawable.drawer)
 
         mAuth = FirebaseAuth.getInstance()
 

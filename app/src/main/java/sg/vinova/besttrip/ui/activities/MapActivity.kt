@@ -16,6 +16,7 @@ import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.fragments.MenuFragment
 import sg.vinova.besttrip.ui.fragments.result.LandingFragment
 import sg.vinova.besttrip.utils.LogUtils
+import sg.vinova.besttrip.widgets.BToolbar
 
 
 /**
@@ -24,6 +25,7 @@ import sg.vinova.besttrip.utils.LogUtils
 class MapActivity : BaseBActivity(), DrawerLayout.DrawerListener {
     private lateinit var composite: CompositeDisposable
     private lateinit var rxPermission: RxPermissions
+    lateinit var bToolbar: BToolbar
 
     override fun replaceFragmentId(): Int = R.id.fragmentContainer
 
@@ -31,6 +33,8 @@ class MapActivity : BaseBActivity(), DrawerLayout.DrawerListener {
 
     override fun init() {
         setActionBar(toolbar)
+        bToolbar = toolbar
+
         replaceFragment(MenuFragment.newInstance(), R.id.leftContainer)
 
         composite = CompositeDisposable()
@@ -60,34 +64,6 @@ class MapActivity : BaseBActivity(), DrawerLayout.DrawerListener {
         drawer.openDrawer(Gravity.START)
     }
 
-    fun setTitle(string: String) {
-        toolbar.setToolbarTitle(string)
-    }
-
-    fun setLeftIcon(int: Int?) {
-        if (int == null) toolbar.hideLeftIcon()
-        else toolbar.setLeftIcon(int)
-    }
-
-    fun setRightIcon(int: Int?) {
-        if (int == null) toolbar.hideRightIcon()
-        else toolbar.setRightIcon(int)
-    }
-
-    fun setToolbarListener(listener: BaseListener.OnToolbarClickListener) {
-        toolbar.listener = listener
-    }
-
-    fun hideToolbar() {
-        if (toolbar.visibility == View.VISIBLE)
-            toolbar.visibility = View.GONE
-    }
-
-    fun showToolbar() {
-        if (toolbar.visibility == View.GONE)
-            toolbar.visibility = View.VISIBLE
-    }
-
     override fun onDrawerStateChanged(newState: Int) {
 
     }
@@ -102,5 +78,15 @@ class MapActivity : BaseBActivity(), DrawerLayout.DrawerListener {
 
     override fun onDrawerOpened(drawerView: View) {
         fragmentContainer.isEnabled = false
+    }
+
+    fun showLoading() {
+        fragmentContainer.isEnabled = false
+        loadingBar.visibility = View.VISIBLE
+    }
+
+    fun hideLoading() {
+        fragmentContainer.isEnabled = true
+        loadingBar.visibility = View.INVISIBLE
     }
 }

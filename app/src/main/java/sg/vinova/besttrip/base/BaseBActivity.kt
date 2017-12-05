@@ -27,12 +27,9 @@ abstract class BaseBActivity : AppCompatActivity() {
     abstract fun init()
 
     override fun onBackPressed() {
-        if (isTaskRoot)
-            BSubmitDialog(this).show().apply {
-                DialogInterface.OnCancelListener { getBaseActivity().finish() }
-            }
-        else
-            super.onBackPressed()
+        BSubmitDialog(this).show().apply {
+            DialogInterface.OnCancelListener { finish() }
+        }
     }
 
     open fun changeFragment(fragment: BaseBFragment, addBackStack: Boolean) {

@@ -8,6 +8,7 @@ import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
 import sg.vinova.besttrip.presenter.account.LoginPresenter
+import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.utils.KeyboardUtils
@@ -50,7 +51,7 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
 
         mActivity.showToolbar()
 
-        mActivity.setLeftIcon(R.drawable.drawer)
+        mActivity.bToolbar.setLeftIcon(R.drawable.drawer)
 
         mAuth = FirebaseAuth.getInstance()
 

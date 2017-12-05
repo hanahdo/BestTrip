@@ -18,7 +18,7 @@ class LoginPresenter @Inject constructor(private var context: Context) : BaseBPr
     fun loginWithEmail(mAuth: FirebaseAuth, email: String, password: String) {
         requestSubscriptions!!.add(
                 Observable.just("")
-                        .subscribeOn(Schedulers.computation())
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             mAuth.signInWithEmailAndPassword(email, password)

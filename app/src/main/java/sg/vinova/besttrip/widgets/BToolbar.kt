@@ -17,7 +17,7 @@ import java.util.*
 class BToolbar : Toolbar {
 
     private var fontFamily = ""
-    lateinit var listener: BaseListener.OnToolbarClickListener
+    var listener: BaseListener.OnToolbarClickListener? = null
 
     constructor(context: Context?) : super(context) {
         init(context)
@@ -70,9 +70,10 @@ class BToolbar : Toolbar {
         tvTitle.typeface = tf
     }
 
-    fun setToolbarTitle(string: String?) {
-        if (string == null) return
+    fun setToolbarTitle(string: String?): BToolbar? {
+        if (string == null) return null
         tvTitle.text = string
+        return this
     }
 
     fun hideLeftIcon() {
@@ -83,15 +84,21 @@ class BToolbar : Toolbar {
         ivRight.visibility = View.INVISIBLE
     }
 
-    fun setLeftIcon(drawable: Int) {
+    fun setLeftIcon(drawable: Int): BToolbar? {
+        if (drawable == 0) return null
         ivLeft.visibility = View.VISIBLE
         GlideUtils.loadImage(drawable, context, ivLeft)
-        ivLeft.setOnClickListener({ listener.onLeftClick() })
+        if (listener != null)
+            ivLeft.setOnClickListener({ listener!!.onLeftClick() })
+        return this
     }
 
-    fun setRightIcon(drawable: Int) {
+    fun setRightIcon(drawable: Int): BToolbar? {
+        if (drawable == 0) return null
         ivLeft.visibility = View.VISIBLE
         GlideUtils.loadImage(drawable, context, ivRight)
-        ivRight.setOnClickListener({ listener.onRightClick() })
+        if (listener != null)
+            ivRight.setOnClickListener({ listener!!.onRightClick() })
+        return this
     }
 }

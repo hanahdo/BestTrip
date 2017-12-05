@@ -16,7 +16,7 @@ class SplashPresenter @Inject constructor(private var context: Context) : BaseBP
     fun checkUserLogin(mAuth: FirebaseAuth) {
         requestSubscriptions!!.add(
                 Observable.just("")
-                        .subscribeOn(Schedulers.computation())
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             if (mAuth.currentUser != null) weakReference!!.get()!!.loginSuccess()

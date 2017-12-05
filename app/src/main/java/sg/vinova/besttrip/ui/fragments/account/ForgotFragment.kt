@@ -42,7 +42,7 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
         KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
 
         mActivity.showToolbar()
-        mActivity.setLeftIcon(R.drawable.back)
+        mActivity.bToolbar.setLeftIcon(R.drawable.back)
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -50,7 +50,7 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
     }
 
     private fun onClick() {
-        mActivity.setToolbarListener(this)
+        mActivity.bToolbar.listener = this
         btnSend.setOnClickListener(this)
     }
 
