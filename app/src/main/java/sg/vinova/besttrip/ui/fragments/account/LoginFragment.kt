@@ -2,6 +2,7 @@ package sg.vinova.besttrip.ui.fragments.account
 
 import android.text.TextUtils
 import android.view.View
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.*
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
@@ -20,6 +21,7 @@ import javax.inject.Inject
  */
 class LoginFragment : BaseBFragment(), View.OnClickListener {
     private lateinit var mActivity: LoginActivity
+    private lateinit var mAuth: FirebaseAuth
 
     @Inject lateinit var presenter: LoginPresenter
 
@@ -49,6 +51,8 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
         mActivity.showToolbar()
 
         mActivity.setLeftIcon(R.drawable.drawer)
+
+        mAuth = FirebaseAuth.getInstance()
 
         if (!TextUtils.isEmpty(email))
             edtEmail.setText(email)
@@ -88,7 +92,7 @@ class LoginFragment : BaseBFragment(), View.OnClickListener {
             }
             R.id.btnLoginEmail -> {
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password))
-                    presenter.loginWithEmail(email, password)
+                    presenter.loginWithEmail(mAuth, email, password)
             }
             R.id.tvForgot -> {
                 changeFragment(ForgotFragment.newInstance(), true)

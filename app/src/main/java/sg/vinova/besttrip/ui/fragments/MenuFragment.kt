@@ -1,6 +1,7 @@
 package sg.vinova.besttrip.ui.fragments
 
 import android.view.View
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_menu.*
 import sg.vinova.besttrip.BApplication
@@ -10,7 +11,6 @@ import sg.vinova.besttrip.presenter.MenuPresenter
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.ui.fragments.result.MapFragment
-import sg.vinova.besttrip.utils.FirebaseUtils
 import sg.vinova.besttrip.utils.GlideUtils
 import sg.vinova.besttrip.utils.LogUtils
 import sg.vinova.besttrip.widgets.dialogs.BErrorDialog
@@ -25,6 +25,7 @@ class MenuFragment : BaseBFragment(), View.OnClickListener {
     @Inject lateinit var presenter: MenuPresenter
     private lateinit var mActivity: MapActivity
     private lateinit var mUser: FirebaseUser
+    private lateinit var mAuth: FirebaseAuth
 
     companion object {
         fun newInstance(): MenuFragment = MenuFragment()
@@ -40,8 +41,11 @@ class MenuFragment : BaseBFragment(), View.OnClickListener {
         if (!isAdded) return
         if (activity is MapActivity)
             mActivity = activity as MapActivity
-        if (FirebaseUtils.getCurrentUser() != null) {
-            mUser = FirebaseUtils.getCurrentUser()!!
+
+        mAuth = FirebaseAuth.getInstance()
+
+        if (mAuth.currentUser != null) {
+            mUser = mAuth.currentUser!!
             initView()
         } else {
             initAnonymousView()
@@ -92,7 +96,7 @@ class MenuFragment : BaseBFragment(), View.OnClickListener {
 //                else changeFragment()
             }
             R.id.tvLogOut -> {
-                presenter.logout()
+                presenter.logout(mAuth)
             }
         }
     }

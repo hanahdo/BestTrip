@@ -2,6 +2,7 @@ package sg.vinova.besttrip.ui.fragments.account
 
 import android.text.TextUtils
 import android.view.View
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_forgot.*
 import org.jetbrains.anko.design.snackbar
 import sg.vinova.besttrip.BApplication
@@ -21,6 +22,7 @@ import javax.inject.Inject
 class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToolbarClickListener {
     private lateinit var mActivity: LoginActivity
     @Inject lateinit var presenter: ForgotPresenter
+    private lateinit var mAuth: FirebaseAuth
 
     companion object {
         fun newInstance(): ForgotFragment = ForgotFragment()
@@ -41,6 +43,8 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
 
         mActivity.showToolbar()
         mActivity.setLeftIcon(R.drawable.back)
+
+        mAuth = FirebaseAuth.getInstance()
 
         onClick()
     }
@@ -68,7 +72,7 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
         when (v.id) {
             R.id.btnSend -> {
                 LogUtils.bDebug(this.javaClass, "Send click, email: $email")
-                if (!TextUtils.isEmpty(email)) presenter.forgotPassword(email)
+                if (!TextUtils.isEmpty(email)) presenter.forgotPassword(mAuth, email)
             }
         }
     }

@@ -3,6 +3,7 @@ package sg.vinova.besttrip.presenter.result
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Location
 import android.support.v4.app.ActivityCompat
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -10,6 +11,8 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.Task
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import sg.vinova.besttrip.base.BaseBPresenter
@@ -38,9 +41,17 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
     fun getMyLocation(mGoogleApiClient: GoogleApiClient) {
         if (mGoogleApiClient.isConnected) {
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) return
-            LocationServices.getFusedLocationProviderClient(context).lastLocation.addOnSuccessListener({ location ->
-                weakReference!!.get()!!.getLocationSuccess(location)
-            }).addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
+            requestSubscriptions!!.add(
+                    Observable.just("")
+                            .subscribeOn(Schedulers.computation())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                LocationServices.getFusedLocationProviderClient(context).lastLocation
+                                        .addOnSuccessListener({ location -> weakReference!!.get()!!.getLocationSuccess(location) })
+                                        .addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
+                            })
+            )
+
         }
     }
 

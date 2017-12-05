@@ -2,6 +2,7 @@ package sg.vinova.besttrip.ui.fragments.account
 
 import android.text.TextUtils
 import android.view.View
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import org.jetbrains.anko.design.snackbar
 import sg.vinova.besttrip.BApplication
@@ -19,6 +20,7 @@ import javax.inject.Inject
  */
 class SignUpFragment : BaseBFragment(), View.OnClickListener {
     private lateinit var mActivity: LoginActivity
+    private lateinit var mAuth: FirebaseAuth
     @Inject lateinit var presenter: SignUpPresenter
     private var email: String = ""
 
@@ -46,6 +48,8 @@ class SignUpFragment : BaseBFragment(), View.OnClickListener {
 
         mActivity.showToolbar()
         mActivity.setLeftIcon(R.drawable.drawer)
+
+        mAuth = FirebaseAuth.getInstance()
 
         if (!TextUtils.isEmpty(email))
             edtEmail.setText(email)
@@ -88,7 +92,7 @@ class SignUpFragment : BaseBFragment(), View.OnClickListener {
             }
             R.id.btnSignUpEmail -> {
                 if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password))
-                    presenter.signUpWithEmail(username, email, password)
+                    presenter.signUpWithEmail(mAuth, username, email, password)
             }
         }
     }

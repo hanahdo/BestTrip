@@ -66,10 +66,6 @@ android {
         }
     }
 
-    kapt {
-        correctErrorTypes = true
-        generateStubs = true
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -83,6 +79,16 @@ ext {
     glide_version = '4.2.0'
     retrofit_version = '2.3.0'
     anko_version = '0.10.3'
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+    kapt{
+        correctErrorTypes = true
+        generateStubs = true
+    }
 }
 
 dependencies {
@@ -134,10 +140,4 @@ dependencies {
     implementation "com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar"
 }
 
-
 apply plugin: "com.google.gms.google-services"
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}

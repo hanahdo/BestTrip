@@ -1,13 +1,12 @@
 package sg.vinova.besttrip.presenter
 
 import android.content.Context
-import io.reactivex.Flowable
+import com.google.firebase.auth.FirebaseAuth
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import sg.vinova.besttrip.base.BaseBPresenter
 import sg.vinova.besttrip.ui.fragments.MenuFragment
-import sg.vinova.besttrip.utils.FirebaseUtils
 import javax.inject.Inject
 
 /**
@@ -15,12 +14,15 @@ import javax.inject.Inject
  */
 class MenuPresenter @Inject constructor(context: Context) : BaseBPresenter<MenuFragment>(context) {
 
-    fun logout() {
-        requestSubscriptions!!.add(Flowable.just("")
-                .subscribeOn(Schedulers.single())
-                .map { FirebaseUtils.logout() }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ weakReference!!.get()!!.logoutSuccess() }, {t -> weakReference!!.get()!!.error(t.localizedMessage) }))
+    fun logout(mAuth: FirebaseAuth) {
+        requestSubscriptions!!.add(
+                Observable.just("")
+                        .subscribeOn(Schedulers.single())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            mAuth.signOut()
+                            weakReference!!.get()!!.logoutSuccess()
+                        }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) }))
     }
 
 }

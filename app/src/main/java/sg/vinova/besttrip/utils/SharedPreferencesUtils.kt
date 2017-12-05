@@ -10,10 +10,15 @@ import sg.vinova.besttrip.library.Constant
 /**
  * Created by Hanah on 11/22/2017.
  */
-class SharedPreferencesUtils(private var context: Context) {
+class SharedPreferencesUtils() {
+    private lateinit var context: Context
 
     companion object {
-        fun newInstance(context: Context): SharedPreferencesUtils = SharedPreferencesUtils(context)
+        fun getInstance(context: Context): SharedPreferencesUtils {
+            val sharePreferenceUtils = SharedPreferencesUtils()
+            sharePreferenceUtils.context = context
+            return sharePreferenceUtils
+        }
     }
 
     init {
@@ -29,42 +34,10 @@ class SharedPreferencesUtils(private var context: Context) {
         return value
     }
 
-    fun setStringPreference(key: String, value: String): Boolean {
+    fun setStringPreference(key: String, value: String) {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         if (preferences != null && !TextUtils.isEmpty(key)) {
-            val editor = preferences.edit()
-            editor.putString(key, value)
-            return editor.commit()
+            preferences.edit().putString(key, value).apply()
         }
-        return false
-    }
-
-    fun getToken(): String? {
-        var value: String? = null
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        if (preferences != null) {
-            value = preferences.getString(Constant.TokenKey, null)
-        }
-        return value
-    }
-
-    fun setToken(value: String): Boolean {
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        if (preferences != null) {
-            val editor = preferences.edit()
-            editor.putString(Constant.TokenKey, value)
-            return editor.commit()
-        }
-        return false
-    }
-
-    fun clearToken(): Boolean {
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        if (preferences != null) {
-            val editor = preferences.edit()
-            editor.putString(Constant.TokenKey, "")
-            return editor.commit()
-        }
-        return false
     }
 }

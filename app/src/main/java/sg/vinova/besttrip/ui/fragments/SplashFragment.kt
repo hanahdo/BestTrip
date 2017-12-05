@@ -2,6 +2,7 @@ package sg.vinova.besttrip.ui.fragments
 
 import android.os.Bundle
 import android.os.Handler
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_splash.*
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
@@ -19,10 +20,9 @@ import javax.inject.Inject
  * Created by Hanah on 11/22/2017.
  */
 class SplashFragment : BaseBFragment() {
-
-
     @Inject lateinit var presenter: SplashPresenter
     private lateinit var mActivity: LoginActivity
+    private lateinit var mAuth: FirebaseAuth
 
     companion object {
         fun newInstance(): SplashFragment = SplashFragment()
@@ -47,8 +47,9 @@ class SplashFragment : BaseBFragment() {
         KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
 
         mActivity.hideToolbar()
+        mAuth = FirebaseAuth.getInstance()
 
-        Handler().postDelayed({ presenter.checkUserLogin() }, 2000)
+        Handler().postDelayed({ presenter.checkUserLogin(mAuth) }, 2000)
     }
 
     override fun bindPresenter() = presenter.bind(this)
