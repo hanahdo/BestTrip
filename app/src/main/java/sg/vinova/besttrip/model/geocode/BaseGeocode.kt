@@ -9,5 +9,5 @@ class BaseGeocode {
     @SerializedName("results")
     var results: ArrayList<Result>? = null
     @SerializedName("status")
-    var status: String? = null
+    var status: String = ""
 }

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  */
 class Result {
     @SerializedName("formatted_address")
-    var address: String? = null
+    var address: String = ""
     @SerializedName("place_id")
-    var placeId: String? = null
+    var placeId: String = ""
 }

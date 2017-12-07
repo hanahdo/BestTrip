@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_search_places.view.*
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBAdapter
+import sg.vinova.besttrip.model.LocationNearby
 import sg.vinova.besttrip.model.autocomplete.Prediction
 
 /**
  * Created by hanah on 12/1/17.
  */
-class SearchAdapter : BaseBAdapter<Prediction, SearchAdapter.SearchVH>() {
+class SearchAdapter : BaseBAdapter<LocationNearby, SearchAdapter.SearchVH>() {
     lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SearchVH? {
         context = parent!!.context
@@ -27,8 +28,14 @@ class SearchAdapter : BaseBAdapter<Prediction, SearchAdapter.SearchVH>() {
 
     inner class SearchVH(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         fun bind(position: Int) {
-            val prediction: Prediction = getItemAt(position)
-            itemView.tvAddress.text = prediction.description
+            val nearby: LocationNearby = getItemAt(position)
+
+            itemView.tvAddress.text = nearby.address
+
+            if (nearby.distance.isNotEmpty()) itemView.tvDistance.text = nearby.distance
+            else itemView.tvDistance.visibility = View.INVISIBLE
+
+            if (position == itemCount - 1) itemView.vLine.visibility = View.INVISIBLE
         }
     }
 }

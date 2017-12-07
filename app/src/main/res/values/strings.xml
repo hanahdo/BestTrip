@@ -35,5 +35,7 @@
     <string name="guest">Guest</string>
     <string name="your_location">Your Location</string>
     <string name="where_you_heading">Where you heading?</string>
+    <string name="nearby">Nearby</string>
+    <string name="distance">Distance</string>
 
 </resources>

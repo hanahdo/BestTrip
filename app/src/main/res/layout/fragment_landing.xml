@@ -45,8 +45,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/default_padding"
             android:drawableStart="@drawable/user_location"
-            android:padding="@dimen/default_padding"
-            android:text="@string/your_location" />
+            android:padding="@dimen/default_padding" />
 
         <sg.vinova.besttrip.widgets.BTextView
             android:id="@+id/tvDestination"

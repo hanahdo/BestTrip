@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/default_padding">
+    android:background="@color/white">
 
     <sg.vinova.besttrip.widgets.BTextView
         android:id="@+id/tvAddress"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/tvDistance"
+        android:padding="@dimen/default_padding_bigger"
         android:text="@string/address"
         app:bFont="RobotoLight"
         app:bFontColor="@color/background"
@@ -17,11 +19,20 @@
 
     <sg.vinova.besttrip.widgets.BTextView
         android:id="@+id/tvDistance"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/address"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/default_padding_bigger"
+        android:text="@string/distance"
         app:bFont="RobotoLight"
-        app:bFontColor="@color/background"
+        app:bFontColor="@color/grey_bold_1"
         app:bTextAlign="Left" />
 
-</LinearLayout>
+    <View
+        android:id="@+id/vLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tvDistance"
+        android:background="@color/grey_bold" />
+
+</RelativeLayout>

@@ -9,5 +9,5 @@ class BaseAutoComplete {
     @SerializedName("predictions")
     var prediction: ArrayList<Prediction>? = null
     @SerializedName("status")
-    var status: String? = null
+    var status: String = ""
 }

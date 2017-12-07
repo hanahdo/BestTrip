@@ -12,6 +12,7 @@
     <color name="dark_background">#20184E</color>
     <color name="grey_light">#e1e1e1</color>
     <color name="grey_bold">#9b9b9b</color>
+    <color name="grey_bold_1">#7d7d7d</color>
     <color name="grey">@android:color/darker_gray</color>
     <color name="red_dark">#c74848</color>
     <color name="black_overlay">#4D000000</color>

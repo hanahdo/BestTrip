@@ -1,7 +1,5 @@
 package sg.vinova.besttrip.ui.fragments.result
 
-import android.app.Dialog
-import android.app.ProgressDialog
 import android.location.Location
 import android.os.Bundle
 import android.view.View
@@ -100,7 +98,7 @@ class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.C
     }
 
     override fun onConnectionSuspended(p0: Int) {
-        mGoogleApiClient.connect();
+        mGoogleApiClient.connect()
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {

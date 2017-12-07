@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  */
 class Prediction {
     @SerializedName("description")
-    var description: String? = null
+    var description: String = ""
     @SerializedName("place_id")
-    var placeId: String? = null
+    var placeId: String = ""
 }
