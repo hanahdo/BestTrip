@@ -8,14 +8,15 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_search_places.view.*
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBAdapter
-import sg.vinova.besttrip.model.autocomplete.Prediction
+import sg.vinova.besttrip.model.places.Location
+import sg.vinova.besttrip.model.places.Result
 import sg.vinova.besttrip.services.BaseListener
 
 /**
- * Created by Hanah on 12/7/2017.
+ * Created by hanah on 12/1/17.
  */
-class SearchAdapter : BaseBAdapter<Prediction, SearchAdapter.SearchVH>() {
-    var listener: BaseListener.OnItemClickListener<String>? = null
+class NearbyAdapter : BaseBAdapter<Result, NearbyAdapter.SearchVH>() {
+    var listener: BaseListener.OnItemClickListener<Location>? = null
     lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SearchVH? {
         context = parent!!.context
@@ -29,15 +30,15 @@ class SearchAdapter : BaseBAdapter<Prediction, SearchAdapter.SearchVH>() {
 
     inner class SearchVH(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         fun bind(position: Int) {
-            val prediction: Prediction = getItemAt(position)
+            val result: Result = getItemAt(position)
 
-            itemView.tvAddress.text = prediction.description
+            itemView.tvAddress.text = "${result.name} - ${result.address2}"
 
             if (position == itemCount - 1) itemView.vLine.visibility = View.INVISIBLE
 
             itemView.setOnClickListener({
                 if (listener != null)
-                    listener!!.onItemClick(prediction.placeId)
+                    listener!!.onItemClick(result.geometry!!.location!!)
             })
         }
     }

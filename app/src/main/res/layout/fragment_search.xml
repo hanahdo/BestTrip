@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -21,6 +22,7 @@
         app:bHint="@string/where_you_heading" />
 
     <sg.vinova.besttrip.widgets.BTextView
+        android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_padding_bigger"
@@ -32,6 +34,16 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_text_size_bigger"
+        android:layout_marginEnd="@dimen/default_text_size_bigger"
+        android:layout_marginStart="@dimen/default_text_size_bigger"
+        android:elevation="@dimen/default_elevation"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvNearby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_text_size_bigger"

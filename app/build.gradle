@@ -72,6 +72,11 @@ android {
     }
 }
 
+kapt{
+    correctErrorTypes = true
+    generateStubs = true
+}
+
 ext {
     support_library_version = '27.0.2'
     firebase_version = '11.6.0'
@@ -79,16 +84,6 @@ ext {
     glide_version = '4.2.0'
     retrofit_version = '2.3.0'
     anko_version = '0.10.3'
-}
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-    kapt{
-        correctErrorTypes = true
-        generateStubs = true
-    }
 }
 
 dependencies {

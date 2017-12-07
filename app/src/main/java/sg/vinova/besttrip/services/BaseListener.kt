@@ -8,4 +8,8 @@ interface BaseListener {
         fun onLeftClick()
         fun onRightClick()
     }
+
+    interface OnItemClickListener<T> {
+        fun onItemClick(t: T)
+    }
 }

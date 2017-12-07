@@ -1,6 +1,5 @@
 package sg.vinova.besttrip.ui.fragments.result
 
-import android.location.Location
 import android.os.Bundle
 import android.view.View
 import com.google.android.gms.common.ConnectionResult
@@ -10,8 +9,8 @@ import org.jetbrains.anko.design.snackbar
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
-import sg.vinova.besttrip.model.BLocation
 import sg.vinova.besttrip.model.YourDirection
+import sg.vinova.besttrip.model.places.Location
 import sg.vinova.besttrip.presenter.result.LandingPresenter
 import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.activities.MapActivity
@@ -86,7 +85,7 @@ class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.C
 
         when (v.id) {
             R.id.tvDestination -> {
-//                changeFragment(SearchFragment.newInstance(mGoogleApiClient, yourLocation), true)
+                changeFragment(SearchFragment.newInstance(direction), true)
             }
         }
     }
@@ -106,14 +105,11 @@ class LandingFragment : BaseBFragment(), View.OnClickListener, GoogleApiClient.C
     }
 
     private var direction: YourDirection = YourDirection()
-    private var yourLocation: BLocation = BLocation()
 
     fun getLocationSuccess(location: Location) {
-        LogUtils.bInfo(this.javaClass, "Your location is: ${location.latitude}, ${location.longitude}")
-        yourLocation.lat = location.latitude
-        yourLocation.long = location.longitude
-        direction.myBLocation = yourLocation
-        presenter.getAddress(yourLocation)
+        LogUtils.bInfo(this.javaClass, "Your location is: ${location.lat}, ${location.lng}")
+        direction.myBLocation = location
+        presenter.getAddress(location)
     }
 
     fun getGeocodeSuccess(address: String?) {

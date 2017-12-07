@@ -14,6 +14,7 @@ import sg.vinova.besttrip.ui.fragments.account.LoginFragment
 import sg.vinova.besttrip.ui.fragments.account.SignUpFragment
 import sg.vinova.besttrip.ui.fragments.result.LandingFragment
 import sg.vinova.besttrip.ui.fragments.result.MapFragment
+import sg.vinova.besttrip.ui.fragments.result.SearchFragment
 import javax.inject.Singleton
 
 /**
@@ -22,20 +23,28 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(BModule::class))
 interface BComponent {
-    // Inject Application
+    /**
+     * Inject Application
+     */
     fun inject(app: BApplication)
 
-    // Inject Base
+    /**
+     *  Inject Base
+     */
     fun inject(activity: BaseBActivity)
 
     fun inject(fragment: BaseBFragment)
 
-    // Inject Activity
+    /**
+     * Inject Activity
+     */
     fun inject(activity: LoginActivity)
 
     fun inject(activity: MapActivity)
 
-    // Inject fragment
+    /**
+     * Inject fragment
+     */
     fun inject(fragment: SplashFragment)
 
     fun inject(fragment: MenuFragment)
@@ -49,4 +58,6 @@ interface BComponent {
     fun inject(fragment: MapFragment)
 
     fun inject(fragment: LandingFragment)
+
+    fun inject(fragment: SearchFragment)
 }

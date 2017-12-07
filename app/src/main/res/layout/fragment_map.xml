@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,27 +9,5 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <sg.vinova.besttrip.widgets.BEditText
-        android:id="@+id/edtPlaces"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_padding"
-        android:padding="@dimen/default_padding_small"
-        android:textSize="@dimen/default_text_size"
-        app:bBackground="@drawable/bg_b_edit_text"
-        app:bFont="RobotoLight"
-        app:bFontColor="@color/background"
-        app:bHint="Places" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvSearch"
-        android:visibility="invisible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/edtPlaces"
-        android:layout_margin="@dimen/default_padding">
-
-    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

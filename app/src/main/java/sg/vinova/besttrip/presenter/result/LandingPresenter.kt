@@ -3,22 +3,21 @@ package sg.vinova.besttrip.presenter.result
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Looper
 import android.support.v4.app.ActivityCompat
-import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.location.*
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.Task
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import sg.vinova.besttrip.base.BaseBPresenter
 import sg.vinova.besttrip.library.Constant.FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
 import sg.vinova.besttrip.library.Constant.UPDATE_INTERVAL_IN_MILLISECONDS
-import sg.vinova.besttrip.model.BLocation
+import sg.vinova.besttrip.model.places.Location
 import sg.vinova.besttrip.ui.fragments.result.LandingFragment
 import sg.vinova.besttrip.usecase.SearchUsecase
 import javax.inject.Inject
@@ -29,7 +28,7 @@ import javax.inject.Inject
  */
 class LandingPresenter @Inject constructor(private var context: Context) : BaseBPresenter<LandingFragment>(context) {
     @Inject lateinit var searchUsecase: SearchUsecase
-    lateinit var mLocationRequest: LocationRequest
+    private lateinit var mLocationRequest: LocationRequest
     private var lastLocation: Location? = null
 
     fun createLocationRequest(mGoogleApiClient: GoogleApiClient) {
@@ -49,7 +48,7 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
                                 LocationServices.getFusedLocationProviderClient(context).lastLocation
-                                        .addOnSuccessListener({ location -> if (location != null) lastLocation = location })
+                                        .addOnSuccessListener({ location -> if (location != null) lastLocation = Location(location.latitude, location.longitude) })
                                         .addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
                                 if (lastLocation == null)
                                     LocationServices.getFusedLocationProviderClient(context).requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
@@ -65,7 +64,7 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
         override fun onLocationResult(locationResult: LocationResult?) {
             locationResult!!.locations
                     .filterNotNull()
-                    .forEach { weakReference!!.get()!!.getLocationSuccess(it) }
+                    .forEach { weakReference!!.get()!!.getLocationSuccess(Location(it.latitude, it.longitude)) }
         }
     }
 
@@ -75,13 +74,13 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
         return result
     }
 
-    fun getAddress(yourLocation: BLocation) {
-        requestSubscriptions!!.add(searchUsecase.getAddress("${yourLocation.lat},${yourLocation.long}")
+    fun getAddress(yourLocation: Location) {
+        requestSubscriptions!!.add(searchUsecase.getAddress("${yourLocation.lat},${yourLocation.lng}")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ geocode ->
                     if (geocode.results != null && geocode.results!!.isNotEmpty())
-                        weakReference!!.get()!!.getGeocodeSuccess(geocode.results!![0].address)
+                        weakReference!!.get()!!.getGeocodeSuccess(geocode.results!![0].address1)
                 }))
     }
 

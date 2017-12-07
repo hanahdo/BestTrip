@@ -4,7 +4,7 @@ import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
 import sg.vinova.besttrip.model.autocomplete.BaseAutoComplete
-import sg.vinova.besttrip.model.geocode.BaseGeocode
+import sg.vinova.besttrip.model.places.BaseObjectResponse
 
 /**
  * Created by Hanah on 11/27/2017.
@@ -20,8 +20,11 @@ interface BApi {
     }
 
     @GET(place + autocomplete + "json")
-    fun getListLocation(@Query("input") query: String, @Query("key") key: String = ApiKey): Flowable<BaseAutoComplete>
+    fun getListLocation(@Query("input") input: String, @Query("key") key: String = ApiKey): Flowable<BaseAutoComplete>
 
     @GET(geocode + "json")
-    fun getAddressByLocation(@Query("latlng") latlng: String, @Query("key") key: String = ApiKey): Flowable<BaseGeocode>
+    fun getAddressByLocation(@Query("latlng") latlng: String, @Query("key") key: String = ApiKey): Flowable<BaseObjectResponse>
+
+    @GET(place + nearby + "json")
+    fun getNearbyList(@Query("key") key: String = ApiKey, @Query("radius") radius: Int = 1000, @Query("location") location: String): Flowable<BaseObjectResponse>
 }

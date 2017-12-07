@@ -5,7 +5,7 @@ import io.reactivex.Flowable
 import sg.vinova.besttrip.base.BaseUseCase
 import sg.vinova.besttrip.base.DataManager
 import sg.vinova.besttrip.model.autocomplete.BaseAutoComplete
-import sg.vinova.besttrip.model.geocode.BaseGeocode
+import sg.vinova.besttrip.model.places.BaseObjectResponse
 import javax.inject.Inject
 
 /**
@@ -13,11 +13,15 @@ import javax.inject.Inject
  */
 class SearchUsecase @Inject constructor(context: Context, manager: DataManager) : BaseUseCase<Void>(context, manager) {
 
-    fun getAllSearchResult(query: String): Flowable<BaseAutoComplete> {
-        return manager.getApi().getListLocation(query)
+    fun getAllSearchResult(input: String): Flowable<BaseAutoComplete> {
+        return manager.getApi().getListLocation(input = input)
     }
 
-    fun getAddress(latlng: String): Flowable<BaseGeocode> {
-        return manager.getApi().getAddressByLocation(latlng)
+    fun getAddress(latlng: String): Flowable<BaseObjectResponse> {
+        return manager.getApi().getAddressByLocation(latlng = latlng)
+    }
+
+    fun getNearbyList(latlng: String): Flowable<BaseObjectResponse> {
+        return manager.getApi().getNearbyList(location = latlng)
     }
 }
