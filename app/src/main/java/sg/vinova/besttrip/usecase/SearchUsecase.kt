@@ -24,4 +24,8 @@ class SearchUsecase @Inject constructor(context: Context, manager: DataManager) 
     fun getNearbyList(latlng: String): Flowable<BaseObjectResponse> {
         return manager.getApi().getNearbyList(location = latlng)
     }
+
+    fun getLocationByPlaceId(placeId: String): Flowable<BaseObjectResponse> {
+        return manager.getApi().getLocationByPlaceId(placeId = placeId)
+    }
 }

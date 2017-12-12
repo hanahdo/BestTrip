@@ -80,12 +80,12 @@ class SearchFragment : BaseBFragment() {
         onClick()
     }
 
-    fun showNearby() {
+    private fun showNearby() {
         rvSearch.visibility = View.GONE
         rvNearby.visibility = View.VISIBLE
     }
 
-    fun showSearch() {
+    private fun showSearch() {
         rvSearch.visibility = View.VISIBLE
         rvNearby.visibility = View.GONE
     }
@@ -93,7 +93,7 @@ class SearchFragment : BaseBFragment() {
     private fun onClick() {
         sAdapter.listener = object : BaseListener.OnItemClickListener<String> {
             override fun onItemClick(t: String) {
-//                changeFragment(ResultFragment.newInstance(direction), false)
+                presenter.getLocationByPlaceId(t)
             }
 
         }
@@ -101,6 +101,7 @@ class SearchFragment : BaseBFragment() {
         nAdapter.listener = object : BaseListener.OnItemClickListener<Location> {
             override fun onItemClick(t: Location) {
                 direction.destination = t
+                LogUtils.bDebug(this.javaClass, "Destination: ${t.lat}, ${t.lng}")
 //                changeFragment(ResultFragment.newInstance(direction), false)
             }
 
@@ -108,30 +109,19 @@ class SearchFragment : BaseBFragment() {
 
         edtDestination.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-//                if (p0.isNullOrEmpty()) {
-//                    mActivity.showLoading()
-//                    nAdapter.clear()
-//                    showNearby()
-//                    nAdapter.addAll(listNearby)
-//                    nAdapter.notifyDataSetChanged()
-//                    mActivity.hideLoading()
-//                }
                 mActivity.showLoading()
+                if (p0.isNullOrEmpty()) {
+                    showNearby()
+                    mActivity.hideLoading()
+                }
                 presenter.getSearchResult(p0.toString())
+                mActivity.hideLoading()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0.isNullOrEmpty()) {
-                    mActivity.showLoading()
-                    nAdapter.clear()
-                    showNearby()
-                    nAdapter.addAll(listNearby)
-                    nAdapter.notifyDataSetChanged()
-                    mActivity.hideLoading()
-                }
             }
 
         })
@@ -169,5 +159,12 @@ class SearchFragment : BaseBFragment() {
         sAdapter.addAll(predictions)
         sAdapter.notifyDataSetChanged()
         mActivity.hideLoading()
+    }
+
+    fun getLocationByPlaceIdSuccess(location: Location?) {
+        if (location == null) return
+        direction.destination = location
+        LogUtils.bDebug(this.javaClass, "Destination: ${location.lat}, ${location.lng}")
+//                changeFragment(ResultFragment.newInstance(direction), false)
     }
 }

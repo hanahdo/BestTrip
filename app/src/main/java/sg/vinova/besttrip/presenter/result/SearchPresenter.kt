@@ -36,4 +36,14 @@ class SearchPresenter @Inject constructor(private var context: Context) : BaseBP
                         weakReference!!.get()!!.getSearchResultSuccess(baseAutoComplete.predictions)
                 }, { t -> weakReference!!.get()!!.error(t.localizedMessage) }))
     }
+
+    fun getLocationByPlaceId(placeId: String) {
+        requestSubscriptions!!.add(searchUsecase.getLocationByPlaceId(placeId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ baseObjectResponse ->
+                    if (baseObjectResponse.status == "OK")
+                        weakReference!!.get()!!.getLocationByPlaceIdSuccess(baseObjectResponse.results!![0].geometry!!.location)
+                }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) }))
+    }
 }
