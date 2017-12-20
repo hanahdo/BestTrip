@@ -42,19 +42,19 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
     fun getMyLocation(mGoogleApiClient: GoogleApiClient) {
         if (mGoogleApiClient.isConnected) {
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) return
-            requestSubscriptions!!.add(
+            requestSubscriptions.add(
                     Observable.just("")
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
                                 LocationServices.getFusedLocationProviderClient(context).lastLocation
                                         .addOnSuccessListener({ location -> if (location != null) lastLocation = Location(location.latitude, location.longitude) })
-                                        .addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
+                                        .addOnFailureListener({ exception -> weakReference.get()!!.error(exception.localizedMessage) })
                                 if (lastLocation == null)
                                     LocationServices.getFusedLocationProviderClient(context).requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
                                 else
-                                    weakReference!!.get()!!.getLocationSuccess(lastLocation!!)
-                            }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
+                                    weakReference.get()!!.getLocationSuccess(lastLocation!!)
+                            }, { throwable -> weakReference.get()!!.error(throwable.localizedMessage) })
             )
 
         }
@@ -64,7 +64,7 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
         override fun onLocationResult(locationResult: LocationResult?) {
             locationResult!!.locations
                     .filterNotNull()
-                    .forEach { weakReference!!.get()!!.getLocationSuccess(Location(it.latitude, it.longitude)) }
+                    .forEach { weakReference.get()!!.getLocationSuccess(Location(it.latitude, it.longitude)) }
         }
     }
 
@@ -75,12 +75,12 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
     }
 
     fun getAddress(yourLocation: Location) {
-        requestSubscriptions!!.add(searchUsecase.getAddress("${yourLocation.lat},${yourLocation.lng}")
+        requestSubscriptions.add(searchUsecase.getAddress("${yourLocation.lat},${yourLocation.lng}")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ geocode ->
                     if (geocode.results != null && geocode.results!!.isNotEmpty())
-                        weakReference!!.get()!!.getGeocodeSuccess(geocode.results!![0].address1)
+                        weakReference.get()!!.getGeocodeSuccess(geocode.results!![0].address1)
                 }))
     }
 

@@ -32,6 +32,6 @@ interface BApi {
     @GET(place + details + "json")
     fun getLocationByPlaceId(@Query("placeid") placeId: String, @Query("key") key: String = API_KEY): Flowable<BaseObjectResponse>
 
-    @GET(directions + "json")
-    fun getDirections():Flowable<>
+//    @GET(directions + "json")
+//    fun getDirections():Flowable<>
 }

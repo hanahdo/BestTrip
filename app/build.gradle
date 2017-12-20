@@ -59,7 +59,7 @@ android {
             debuggable false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             resValue("string", "API_key", "AIzaSyBnLvgh2tH-5GYLlfRgOWaibr7TCdKNd_c")
-            buildConfigField("boolean", "isLog", 'true')
+            buildConfigField("boolean", "isLog", 'false')
             buildConfigField("String", "BASE_URL", '"https://maps.googleapis.com/maps/api/"')
             signingConfig signingConfigs.debug
             applicationIdSuffix ".release"

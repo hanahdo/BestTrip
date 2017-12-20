@@ -14,14 +14,14 @@ import javax.inject.Inject
 class MapPresenter @Inject constructor(private var context: Context) : BaseBPresenter<MapFragment>(context) {
     @Inject lateinit var searchUsecase: SearchUsecase
     fun getLocationList(s: String) {
-        requestSubscriptions!!.add(searchUsecase.getAllSearchResult(s)
+        requestSubscriptions.add(searchUsecase.getAllSearchResult(s)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ baseObject ->
                     if (baseObject.status == "OK" || baseObject.predictions!!.isNotEmpty()) {
-                        weakReference!!.get()!!.getSuccess(baseObject.predictions)
+                        weakReference.get()!!.getSuccess(baseObject.predictions)
                     } else {
-                        weakReference!!.get()!!.error(baseObject.status)
+                        weakReference.get()!!.error(baseObject.status)
                     }
                 }))
     }

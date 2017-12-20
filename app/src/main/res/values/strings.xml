@@ -38,4 +38,7 @@
     <string name="nearby">Nearby</string>
     <string name="distance">Distance</string>
 
+    <!-- Nearby Adapter -->
+    <string name="result">%s - %s</string>
+
 </resources>

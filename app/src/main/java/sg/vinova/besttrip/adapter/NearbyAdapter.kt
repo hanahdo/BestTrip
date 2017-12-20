@@ -32,7 +32,7 @@ class NearbyAdapter : BaseBAdapter<Result, NearbyAdapter.SearchVH>() {
         fun bind(position: Int) {
             val result: Result = getItemAt(position)
 
-            itemView.tvAddress.text = "${result.name} - ${result.address2}"
+            itemView.tvAddress.text = context.resources.getString(R.string.result, result.name, result.address2)
 
             if (position == itemCount - 1) itemView.vLine.visibility = View.INVISIBLE
 

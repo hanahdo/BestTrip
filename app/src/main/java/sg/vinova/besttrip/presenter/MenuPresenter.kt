@@ -15,14 +15,14 @@ import javax.inject.Inject
 class MenuPresenter @Inject constructor(context: Context) : BaseBPresenter<MenuFragment>(context) {
 
     fun logout(mAuth: FirebaseAuth) {
-        requestSubscriptions!!.add(
+        requestSubscriptions.add(
                 Observable.just("")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             mAuth.signOut()
-                            weakReference!!.get()!!.logoutSuccess()
-                        }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) }))
+                            weakReference.get()!!.logoutSuccess()
+                        }, { throwable -> weakReference.get()!!.error(throwable.localizedMessage) }))
     }
 
 }

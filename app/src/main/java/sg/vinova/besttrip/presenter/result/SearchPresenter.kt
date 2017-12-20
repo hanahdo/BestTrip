@@ -16,34 +16,34 @@ class SearchPresenter @Inject constructor(private var context: Context) : BaseBP
     @Inject lateinit var searchUsecase: SearchUsecase
 
     fun getNearby(location: Location) {
-        requestSubscriptions!!.add(searchUsecase.getNearbyList("${location.lat},${location.lng}")
+        requestSubscriptions.add(searchUsecase.getNearbyList("${location.lat},${location.lng}")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ baseObjResponse ->
                     if (baseObjResponse.status == "OK")
-                        weakReference!!.get()!!.getNearbySuccess(baseObjResponse.results)
+                        weakReference.get()!!.getNearbySuccess(baseObjResponse.results)
                     else
-                        weakReference!!.get()!!.error(baseObjResponse.status)
-                }, { t -> weakReference!!.get()!!.error(t.localizedMessage) }))
+                        weakReference.get()!!.error(baseObjResponse.status)
+                }, { t -> weakReference.get()!!.error(t.localizedMessage) }))
     }
 
     fun getSearchResult(input: String) {
-        requestSubscriptions!!.add(searchUsecase.getAllSearchResult(input)
+        requestSubscriptions.add(searchUsecase.getAllSearchResult(input)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ baseAutoComplete ->
                     if (baseAutoComplete.status == "OK")
-                        weakReference!!.get()!!.getSearchResultSuccess(baseAutoComplete.predictions)
-                }, { t -> weakReference!!.get()!!.error(t.localizedMessage) }))
+                        weakReference.get()!!.getSearchResultSuccess(baseAutoComplete.predictions)
+                }, { t -> weakReference.get()!!.error(t.localizedMessage) }))
     }
 
     fun getLocationByPlaceId(placeId: String) {
-        requestSubscriptions!!.add(searchUsecase.getLocationByPlaceId(placeId)
+        requestSubscriptions.add(searchUsecase.getLocationByPlaceId(placeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ baseObjectResponse ->
                     if (baseObjectResponse.status == "OK")
-                        weakReference!!.get()!!.getLocationByPlaceIdSuccess(baseObjectResponse.results!![0].geometry!!.location)
-                }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) }))
+                        weakReference.get()!!.getLocationByPlaceIdSuccess(baseObjectResponse.results!![0].geometry!!.location)
+                }, { throwable -> weakReference.get()!!.error(throwable.localizedMessage) }))
     }
 }

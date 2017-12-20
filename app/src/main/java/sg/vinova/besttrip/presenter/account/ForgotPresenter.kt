@@ -14,15 +14,15 @@ import javax.inject.Inject
  */
 class ForgotPresenter @Inject constructor(private var context: Context) : BaseBPresenter<ForgotFragment>(context) {
     fun forgotPassword(mAuth: FirebaseAuth, email: String) {
-        requestSubscriptions!!.add(
+        requestSubscriptions.add(
                 Observable.just("")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             mAuth.sendPasswordResetEmail(email)
-                                    .addOnSuccessListener({ weakReference!!.get()!!.forgotSuccess() })
-                                    .addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
-                        }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
+                                    .addOnSuccessListener({ weakReference.get()!!.forgotSuccess() })
+                                    .addOnFailureListener({ exception -> weakReference.get()!!.error(exception.localizedMessage) })
+                        }, { throwable -> weakReference.get()!!.error(throwable.localizedMessage) })
         )
     }
 }

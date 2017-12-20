@@ -88,7 +88,7 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
 
     fun forgotSuccess() {
         snackbar(this.view!!, "Please check your mailbox to reset your password.")
-        LogUtils.bInfo(this.javaClass, "An email reset password has sent to ${email}!")
+        LogUtils.bInfo(this.javaClass, "An email reset password has sent to $email!")
         if (!TextUtils.isEmpty(email))
             changeFragment(LoginFragment.newInstance(email), false)
         changeFragment(LoginFragment.newInstance(), false)

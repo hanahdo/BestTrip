@@ -16,7 +16,7 @@ import javax.inject.Inject
 class SignUpPresenter @Inject constructor(private var context: Context) : BaseBPresenter<SignUpFragment>(context) {
 
     fun signUpWithEmail(mAuth: FirebaseAuth, username: String, email: String, password: String) {
-        requestSubscriptions!!.add(
+        requestSubscriptions.add(
                 Observable.just("")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -24,10 +24,10 @@ class SignUpPresenter @Inject constructor(private var context: Context) : BaseBP
                             mAuth.createUserWithEmailAndPassword(email, password)
                                     .addOnSuccessListener({ result ->
                                         result.user.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(username).build())
-                                        weakReference!!.get()!!.signUpSuccess()
+                                        weakReference.get()!!.signUpSuccess()
                                     })
-                                    .addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
-                        }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
+                                    .addOnFailureListener({ exception -> weakReference.get()!!.error(exception.localizedMessage) })
+                        }, { throwable -> weakReference.get()!!.error(throwable.localizedMessage) })
         )
     }
 }

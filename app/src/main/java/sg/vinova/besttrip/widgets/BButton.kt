@@ -87,7 +87,7 @@ class BButton : Button {
 
     private fun setFont(context: Context, fontFamily: String?) {
         if (fontFamily == null) return
-        val tf: Typeface = Typeface.createFromAsset(context.assets, String.format(Locale.US, "fonts/%s", fontFamily))
+        val tf: Typeface = Typeface.createFromAsset(context.assets, "fonts/$fontFamily")
         typeface = tf
     }
 }

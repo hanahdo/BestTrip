@@ -99,7 +99,7 @@ class SignUpFragment : BaseBFragment(), View.OnClickListener {
 
     fun signUpSuccess() {
         LogUtils.bInfo(this.javaClass, "Login Success")
-        snackbar(this.view!!, "Your have sign up successful with email: ${email}, now you can login!!")
+        snackbar(this.view!!, "Your have sign up successful with email: $email, now you can login!!")
         if (!TextUtils.isEmpty(email))
             changeFragment(LoginFragment.newInstance(email), false)
         changeFragment(LoginFragment.newInstance(), false)

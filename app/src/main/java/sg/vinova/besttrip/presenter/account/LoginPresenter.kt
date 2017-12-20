@@ -16,15 +16,15 @@ import javax.inject.Inject
 class LoginPresenter @Inject constructor(private var context: Context) : BaseBPresenter<LoginFragment>(context) {
 
     fun loginWithEmail(mAuth: FirebaseAuth, email: String, password: String) {
-        requestSubscriptions!!.add(
+        requestSubscriptions.add(
                 Observable.just("")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             mAuth.signInWithEmailAndPassword(email, password)
-                                    .addOnSuccessListener({ weakReference!!.get()!!.loginSuccess() })
-                                    .addOnFailureListener({ exception -> weakReference!!.get()!!.error(exception.localizedMessage) })
-                        }, { throwable -> weakReference!!.get()!!.error(throwable.localizedMessage) })
+                                    .addOnSuccessListener({ weakReference.get()!!.loginSuccess() })
+                                    .addOnFailureListener({ exception -> weakReference.get()!!.error(exception.localizedMessage) })
+                        }, { throwable -> weakReference.get()!!.error(throwable.localizedMessage) })
         )
     }
 
