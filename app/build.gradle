@@ -8,7 +8,7 @@ apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.1'
+    buildToolsVersion '27.0.2'
     defaultConfig {
         applicationId "sg.vinova.besttrip"
         minSdkVersion 21
@@ -79,7 +79,7 @@ kapt{
 
 ext {
     support_library_version = '27.0.2'
-    firebase_version = '11.6.0'
+    firebase_version = '11.8.0'
     dagger_version = '2.11'
     glide_version = '4.2.0'
     retrofit_version = '2.3.0'
