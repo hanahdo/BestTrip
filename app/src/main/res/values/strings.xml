@@ -1,12 +1,6 @@
 <resources>
     <string name="app_name">BestTrip</string>
 
-    <!-- Font -->
-    <string name="roboto_regular">roboto_regular.ttf</string>
-    <string name="roboto_light">roboto_light.ttf</string>
-    <string name="roboto_medium">roboto_medium.ttf</string>
-    <string name="roboto_bold">roboto_bold.ttf</string>
-
     <!-- Login Activity -->
     <string name="best_trip_with_us">Best trip with us</string>
     <string name="login">Login</string>
@@ -19,26 +13,12 @@
     <string name="enter_your_email_address_to_reset_password">Enter your email address to reset password</string>
     <string name="send_instruction">Send instruction</string>
 
-    <!-- Custom Error Dialog -->
-    <string name="title">Title</string>
-    <string name="message">message</string>
-    <string name="ok">OK</string>
-    <string name="error">Error</string>
-    <string name="name">Name</string>
-    <string name="address">Address</string>
-    <string name="exit_message">Are you sure to exit?</string>
-    <string name="exit">Exit BestTrip</string>
-    <string name="home">Home</string>
-    <string name="taxi_fare_charges"><![CDATA[Taxi Fare & Charges]]></string>
-    <string name="logout">Logout</string>
-    <string name="login_now">Login Now</string>
-    <string name="guest">Guest</string>
-    <string name="your_location">Your Location</string>
-    <string name="where_you_heading">Where you heading?</string>
-    <string name="nearby">Nearby</string>
-    <string name="distance">Distance</string>
-
     <!-- Nearby Adapter -->
     <string name="result">%s - %s</string>
+    <string name="password">Password</string>
+    <string name="or">Or</string>
+    <string name="skip">Skip</string>
+    <string name="cancel">Cancel</string>
+    <string name="maps">Maps</string>
 
 </resources>

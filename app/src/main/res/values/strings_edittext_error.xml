@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="username_is_empty">Username is empty!</string>
+    <string name="email_is_empty">Email is empty!</string>
+    <string name="password_is_empty">Password is empty!</string>
+</resources>

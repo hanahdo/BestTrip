@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?android:actionBarSize"
@@ -10,22 +10,27 @@
         android:id="@+id/ivLeft"
         android:layout_width="?android:actionBarSize"
         android:layout_height="?android:actionBarSize"
-        android:padding="@dimen/default_padding_bigger" />
+        android:padding="@dimen/default_padding_bigger"
+        tools:src="@drawable/drawer" />
 
-    <sg.vinova.besttrip.widgets.BTextView
+    <TextView
         android:id="@+id/tvTitle"
+        style="@style/BTextView"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:layout_toEndOf="@id/ivLeft"
         android:layout_toStartOf="@id/ivRight"
+        android:fontFamily="@font/roboto_medium"
         android:gravity="center_vertical"
-        app:bFont="RobotoMedium" />
+        android:textSize="@dimen/default_text_size_bigger"
+        tools:text="BestTrip" />
 
     <ImageView
         android:id="@+id/ivRight"
         android:layout_width="?android:actionBarSize"
         android:layout_height="?android:actionBarSize"
         android:layout_alignParentEnd="true"
-        android:padding="@dimen/default_padding_bigger" />
+        android:padding="@dimen/default_padding_bigger"
+        tools:src="@drawable/map_on" />
 
 </RelativeLayout>

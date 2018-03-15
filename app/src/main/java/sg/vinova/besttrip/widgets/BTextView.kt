@@ -37,13 +37,13 @@ class BTextView : TextView {
          * Font family
          * Default is Roboto Regular
          */
-        when (typedArray.getInt(R.styleable.BTextView_bFont, 0)) {
-            0 -> fontFamily = resources.getString(R.string.roboto_regular)
-            1 -> fontFamily = resources.getString(R.string.roboto_light)
-            2 -> fontFamily = resources.getString(R.string.roboto_bold)
-            3 -> fontFamily = resources.getString(R.string.roboto_medium)
-        }
-        setFont(context, fontFamily)
+//        when (typedArray.getInt(R.styleable.BTextView_bFont, 0)) {
+//            0 -> fontFamily = resources.getString(R.string.roboto_regular)
+//            1 -> fontFamily = resources.getString(R.string.roboto_light)
+//            2 -> fontFamily = resources.getString(R.string.roboto_bold)
+//            3 -> fontFamily = resources.getString(R.string.roboto_medium)
+//        }
+//        setFont(context, fontFamily)
 
         /**
          * Set text alignment

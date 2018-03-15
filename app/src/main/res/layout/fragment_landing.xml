@@ -1,34 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layoutContainer"
     android:background="@color/background"
     android:orientation="vertical"
     android:weightSum="2">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/default_padding_xxx"
-        android:layout_marginTop="@dimen/default_padding_xxx"
-        android:layout_weight="0.8"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <sg.vinova.besttrip.widgets.BTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/default_padding"
-            android:text="@string/app_name"
-            android:textSize="@dimen/default_text_size_xxx_huge" />
-
-        <sg.vinova.besttrip.widgets.BTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/best_trip_with_us" />
-    </LinearLayout>
+    <include layout="@layout/view_logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,24 +18,26 @@
         android:paddingEnd="@dimen/default_padding_xxx"
         android:paddingStart="@dimen/default_padding_xxx">
 
-        <sg.vinova.besttrip.widgets.BTextView
+        <TextView
             android:id="@+id/tvYourLocation"
+            style="@style/BTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/default_padding"
             android:drawableStart="@drawable/user_location"
             android:padding="@dimen/default_padding" />
 
-        <sg.vinova.besttrip.widgets.BTextView
+        <TextView
             android:id="@+id/tvDestination"
+            style="@style/BTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_b_edit_text"
             android:drawablePadding="@dimen/default_padding"
             android:drawableStart="@drawable/destination_off"
             android:padding="@dimen/default_padding"
             android:text="@string/where_you_heading"
-            app:bBackground="@drawable/bg_b_edit_text"
-            app:bFontColor="@color/background" />
+            android:textColor="@color/background" />
     </LinearLayout>
 
 </LinearLayout>

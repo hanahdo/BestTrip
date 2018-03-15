@@ -3,9 +3,19 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/background</item>
+        <item name="colorPrimaryDark">@color/dark_background</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="BTextView">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="BEditText">
+        <item name="android:background">@drawable/bg_b_edit_text</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
     </style>
 
 </resources>

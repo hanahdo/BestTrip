@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_b_button"
     android:paddingEnd="@dimen/default_padding_large"
     android:paddingStart="@dimen/default_padding_large">
 
-    <sg.vinova.besttrip.widgets.BTextView
+    <TextView
         android:id="@+id/tvTitle"
+        style="@style/BTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_padding_bigger"
+        android:fontFamily="RobotoBold"
         android:text="@string/title"
-        android:textSize="@dimen/default_text_size_large"
-        app:bFont="RobotoBold"
-        app:bFontColor="@color/dark_background" />
+        android:textColor="@color/dark_background"
+        android:textSize="@dimen/default_text_size_large" />
 
-    <sg.vinova.besttrip.widgets.BTextView
+    <TextView
         android:id="@+id/tvMessage"
+        style="@style/BTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
         android:layout_marginBottom="@dimen/default_padding_large"
         android:layout_marginTop="@dimen/default_padding_large"
         android:text="@string/message"
-        app:bFontColor="@color/background" />
+        android:textColor="@color/background" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,24 +35,26 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-        <sg.vinova.besttrip.widgets.BButton
+        <Button
             android:id="@+id/btnOk"
             android:layout_width="0dp"
-            android:layout_marginEnd="@dimen/default_padding"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_padding_bigger"
+            android:layout_marginEnd="@dimen/default_padding"
             android:layout_weight="1"
+            android:background="@drawable/bg_b_button_dark"
             android:text="@string/ok"
-            app:bBackground="@drawable/bg_b_button_dark" />
+            android:textColor="@color/white" />
 
-        <sg.vinova.besttrip.widgets.BButton
+        <Button
             android:id="@+id/btnCancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_padding_bigger"
             android:layout_weight="1"
-            android:text="Cancel"
-            app:bBackground="@drawable/bg_b_button_dark" />
+            android:background="@drawable/bg_b_button_dark"
+            android:text="@string/cancel"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 

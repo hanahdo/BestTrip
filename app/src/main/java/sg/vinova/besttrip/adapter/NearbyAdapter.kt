@@ -18,8 +18,9 @@ import sg.vinova.besttrip.services.BaseListener
 class NearbyAdapter : BaseBAdapter<Result, NearbyAdapter.SearchVH>() {
     var listener: BaseListener.OnItemClickListener<Location>? = null
     lateinit var context: Context
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SearchVH? {
-        context = parent!!.context
+
+    override fun getViewHolder(parent: ViewGroup, viewType: Int): SearchVH {
+        context = parent.context
         return SearchVH(LayoutInflater.from(context).inflate(R.layout.item_search_places, parent, false))
     }
 

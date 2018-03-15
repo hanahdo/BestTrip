@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <sg.vinova.besttrip.widgets.BEditText
+    <EditText
         android:id="@+id/edtDestination"
+        style="@style/BEditText"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_login_views_height"
         android:layout_margin="@dimen/default_padding_bigger"
         android:drawablePadding="@dimen/default_padding"
         android:drawableStart="@drawable/destination_off"
         android:elevation="@dimen/default_elevation"
+        android:hint="@string/where_you_heading"
         android:inputType="text"
         android:paddingEnd="@dimen/default_padding"
         android:paddingStart="@dimen/default_padding"
-        android:textSize="@dimen/default_text_size"
-        app:bFont="RobotoLight"
-        app:bHint="@string/where_you_heading" />
+        android:textSize="@dimen/default_text_size" />
 
-    <sg.vinova.besttrip.widgets.BTextView
+    <TextView
         android:id="@+id/tvTitle"
+        style="@style/BTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_padding_bigger"
+        android:fontFamily="@font/roboto_medium"
         android:text="@string/nearby"
-        android:textSize="@dimen/default_text_size_bigger"
-        app:bFont="RobotoMedium"
-        app:bFontColor="@color/background"
-        app:bTextAlign="Left" />
+        android:textColor="@color/background"
+        android:textSize="@dimen/default_text_size_bigger" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvSearch"

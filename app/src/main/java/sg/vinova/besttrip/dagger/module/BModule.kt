@@ -23,10 +23,6 @@ import sg.vinova.besttrip.library.Constant.RETRY_BACKOFF_DELAY
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-
-/**
- * Created by hanah on 11/22/17.
- */
 @Module
 class BModule(private val app: BApplication) {
     @Provides

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvLogin"
+        style="@style/BTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingBottom="@dimen/default_padding_bigger"
+        android:paddingEnd="@dimen/default_padding_x"
+        android:paddingStart="0dp"
+        android:paddingTop="@dimen/default_padding_bigger"
+        android:text="@string/login"
+        android:textAlignment="viewEnd"
+        android:textSize="@dimen/default_text_size_bigger" />
+
+    <TextView
+        android:id="@+id/tvSignUp"
+        style="@style/BTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingBottom="@dimen/default_padding_bigger"
+        android:paddingEnd="0dp"
+        android:paddingStart="@dimen/default_padding_x"
+        android:paddingTop="@dimen/default_padding_bigger"
+        android:text="@string/sign_up"
+        android:textColor="@color/grey_bold"
+        android:textSize="@dimen/default_text_size_bigger" />
+</LinearLayout>

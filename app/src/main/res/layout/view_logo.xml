@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginBottom="@dimen/default_padding_xxx"
+    android:layout_marginTop="@dimen/default_padding_xxx"
+    android:layout_weight="0.8"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/BTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:text="@string/app_name"
+        android:textSize="@dimen/default_text_size_xxx_huge" />
+
+    <TextView
+        style="@style/BTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/best_trip_with_us" />
+</LinearLayout>

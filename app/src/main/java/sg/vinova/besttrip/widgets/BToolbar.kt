@@ -1,22 +1,17 @@
 package sg.vinova.besttrip.widgets
 
 import android.content.Context
-import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 import android.widget.Toolbar
 import kotlinx.android.synthetic.main.view_toolbar.view.*
 import sg.vinova.besttrip.R
+import sg.vinova.besttrip.exts.loadImage
 import sg.vinova.besttrip.services.BaseListener
-import sg.vinova.besttrip.utils.GlideUtils
-import java.util.*
 
-/**
- * Created by Hanah on 11/22/2017.
- */
 class BToolbar : Toolbar {
 
-    private var fontFamily = ""
+    //    private var fontFamily = ""
     var listener: BaseListener.OnToolbarClickListener? = null
 
     constructor(context: Context?) : super(context) {
@@ -52,23 +47,23 @@ class BToolbar : Toolbar {
          * Font family
          * Default is Roboto Regular
          */
-        fontFamily = when (typedArray.getInt(R.styleable.BButton_bFont, 0)) {
-            0 -> resources.getString(R.string.roboto_regular)
-            1 -> resources.getString(R.string.roboto_light)
-            2 -> resources.getString(R.string.roboto_bold)
-            3 -> resources.getString(R.string.roboto_medium)
-            else -> resources.getString(R.string.roboto_regular)
-        }
-        setFont(context, fontFamily)
+//        fontFamily = when (typedArray.getInt(R.styleable.BButton_bFont, 0)) {
+//            0 -> resources.getString(R.string.roboto_regular)
+//            1 -> resources.getString(R.string.roboto_light)
+//            2 -> resources.getString(R.string.roboto_bold)
+//            3 -> resources.getString(R.string.roboto_medium)
+//            else -> resources.getString(R.string.roboto_regular)
+//        }
+//        setFont(context, fontFamily)
 
         typedArray.recycle()
     }
 
-    private fun setFont(context: Context, fontFamily: String?) {
-        if (fontFamily == null) return
-        val tf: Typeface = Typeface.createFromAsset(context.assets, String.format(Locale.US, "fonts/%s", fontFamily))
-        tvTitle.typeface = tf
-    }
+//    private fun setFont(context: Context, fontFamily: String?) {
+//        if (fontFamily == null) return
+//        val tf: Typeface = Typeface.createFromAsset(context.assets, String.format(Locale.US, "fonts/%s", fontFamily))
+//        tvTitle.typeface = tf
+//    }
 
     fun setToolbarTitle(string: String?): BToolbar? {
         if (string == null) return null
@@ -86,19 +81,21 @@ class BToolbar : Toolbar {
 
     fun setLeftIcon(drawable: Int): BToolbar? {
         if (drawable == 0) return null
-        ivLeft.visibility = View.VISIBLE
-        GlideUtils.loadImage(drawable, context, ivLeft)
-        if (listener != null)
-            ivLeft.setOnClickListener({ listener!!.onLeftClick() })
+        ivLeft.apply {
+            visibility = View.VISIBLE
+            ivLeft.loadImage(drawable)
+            if (listener != null) setOnClickListener({ listener!!.onLeftClick() })
+        }
         return this
     }
 
     fun setRightIcon(drawable: Int): BToolbar? {
         if (drawable == 0) return null
-        ivLeft.visibility = View.VISIBLE
-        GlideUtils.loadImage(drawable, context, ivRight)
-        if (listener != null)
-            ivRight.setOnClickListener({ listener!!.onRightClick() })
+        ivRight.apply {
+            visibility = View.VISIBLE
+            loadImage(drawable)
+            if (listener != null) setOnClickListener({ listener?.onRightClick() })
+        }
         return this
     }
 }

@@ -12,28 +12,27 @@
         android:orientation="vertical">
 
         <sg.vinova.besttrip.widgets.BToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentInsetStart="0dp" />
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentInsetStart="0dp" />
 
         <FrameLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar" />
+            android:layout_height="match_parent" />
 
         <RelativeLayout
             android:id="@+id/loadingBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
             android:visibility="invisible">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/black_overlay" />
+                android:background="@color/black_overlay"
+                android:contentDescription="@string/app_name" />
 
             <ProgressBar
                 android:layout_width="wrap_content"

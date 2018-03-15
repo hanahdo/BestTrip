@@ -1,31 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical">
 
-    <LinearLayout
+    <include
+        layout="@layout/view_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_padding_xxx"
         android:layout_marginTop="@dimen/default_padding_xxx"
         android:gravity="center"
-        android:orientation="vertical">
-
-        <sg.vinova.besttrip.widgets.BTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="@dimen/default_text_size_xxx_huge" />
-
-        <sg.vinova.besttrip.widgets.BTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/best_trip_with_us" />
-    </LinearLayout>
+        android:orientation="vertical" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,37 +21,10 @@
         android:background="@color/dark_background"
         android:orientation="vertical">
 
-        <LinearLayout
+        <include
+            layout="@layout/view_login_signup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/default_padding"
-            android:paddingTop="@dimen/default_padding">
-
-            <sg.vinova.besttrip.widgets.BTextView
-                android:id="@+id/tvLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/default_login_views_height"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:paddingEnd="@dimen/default_padding_x"
-                android:text="@string/login"
-                android:textSize="@dimen/default_text_size_bigger"
-                app:bFont="RobotoMedium"
-                app:bFontColor="@color/grey_bold"
-                app:bTextAlign="Right" />
-
-            <sg.vinova.besttrip.widgets.BTextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/default_login_views_height"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:paddingStart="@dimen/default_padding_x"
-                android:text="@string/sign_up"
-                android:textSize="@dimen/default_text_size_bigger"
-                app:bFont="RobotoMedium"
-                app:bTextAlign="Left" />
-        </LinearLayout>
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,54 +36,54 @@
             android:background="@drawable/bg_b_edit_text"
             android:orientation="vertical">
 
-            <sg.vinova.besttrip.widgets.BEditText
+            <EditText
                 android:id="@+id/edtUsername"
+                style="@style/BEditText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_login_views_height"
                 android:drawablePadding="@dimen/default_padding"
                 android:drawableStart="@drawable/user_off"
+                android:hint="@string/username"
                 android:inputType="textEmailAddress"
                 android:paddingEnd="@dimen/default_padding"
                 android:paddingStart="@dimen/default_padding"
-                android:textSize="@dimen/default_text_size"
-                app:bFont="RobotoLight"
-                app:bHint="@string/username" />
+                android:textSize="@dimen/default_text_size" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/grey_light" />
 
-            <sg.vinova.besttrip.widgets.BEditText
+            <EditText
                 android:id="@+id/edtEmail"
+                style="@style/BEditText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_login_views_height"
                 android:drawablePadding="@dimen/default_padding"
                 android:drawableStart="@drawable/mail_off"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:paddingEnd="@dimen/default_padding"
                 android:paddingStart="@dimen/default_padding"
-                android:textSize="@dimen/default_text_size"
-                app:bFont="RobotoLight"
-                app:bHint="@string/email" />
+                android:textSize="@dimen/default_text_size" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/grey_light" />
 
-            <sg.vinova.besttrip.widgets.BEditText
+            <EditText
                 android:id="@+id/edtPassword"
+                style="@style/BEditText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_login_views_height"
                 android:drawablePadding="@dimen/default_padding"
                 android:drawableStart="@drawable/password_off"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:paddingEnd="@dimen/default_padding"
                 android:paddingStart="@dimen/default_padding"
-                android:textSize="@dimen/default_text_size"
-                app:bFont="RobotoLight"
-                app:bHint="Password" />
+                android:textSize="@dimen/default_text_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -138,16 +99,17 @@
                 android:layout_height="@dimen/default_login_views_height"
                 android:layout_marginEnd="@dimen/default_padding_small"
                 android:background="@drawable/bg_b_button"
+                android:contentDescription="@string/app_name"
                 android:padding="@dimen/default_padding_bigger"
                 android:src="@drawable/fb" />
 
-            <sg.vinova.besttrip.widgets.BButton
+            <Button
                 android:id="@+id/btnSignUpEmail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_login_views_height"
+                android:background="@drawable/bg_b_button"
                 android:text="@string/sign_up_with_email"
-                app:bBackground="@drawable/bg_b_button"
-                app:bFontColor="@color/background" />
+                android:textColor="@color/background" />
         </LinearLayout>
     </LinearLayout>
 

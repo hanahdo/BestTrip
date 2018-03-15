@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="all">
+        <item
+        android:id="@+id/map"
+        android:checked="true"
+        android:icon="@drawable/ic_maps"
+        android:title="@string/maps"
+        app:showAsAction="always" />
+    </group>
+</menu>

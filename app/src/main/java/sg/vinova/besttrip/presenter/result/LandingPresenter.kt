@@ -27,7 +27,8 @@ import javax.inject.Inject
  * Created by Hanah on 12/3/2017.
  */
 class LandingPresenter @Inject constructor(private var context: Context) : BaseBPresenter<LandingFragment>(context) {
-    @Inject lateinit var searchUsecase: SearchUsecase
+    @Inject
+    lateinit var searchUsecase: SearchUsecase
     private lateinit var mLocationRequest: LocationRequest
     private var lastLocation: Location? = null
 
@@ -48,8 +49,8 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
                                 LocationServices.getFusedLocationProviderClient(context).lastLocation
-                                        .addOnSuccessListener({ location -> if (location != null) lastLocation = Location(location.latitude, location.longitude) })
-                                        .addOnFailureListener({ exception -> weakReference.get()!!.error(exception.localizedMessage) })
+                                        .addOnSuccessListener { location -> if (location != null) lastLocation = Location(location.latitude, location.longitude) }
+                                        .addOnFailureListener { exception -> weakReference.get()!!.error(exception.localizedMessage) }
                                 if (lastLocation == null)
                                     LocationServices.getFusedLocationProviderClient(context).requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
                                 else
@@ -69,9 +70,7 @@ class LandingPresenter @Inject constructor(private var context: Context) : BaseB
     }
 
     fun checkPlayServices(): Int {
-        val googleAPI = GoogleApiAvailability.getInstance()
-        val result = googleAPI.isGooglePlayServicesAvailable(context)
-        return result
+        return GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context)
     }
 
     fun getAddress(yourLocation: Location) {

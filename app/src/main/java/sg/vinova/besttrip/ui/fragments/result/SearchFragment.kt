@@ -4,13 +4,16 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_search.*
-import org.jetbrains.anko.design.snackbar
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.adapter.NearbyAdapter
 import sg.vinova.besttrip.adapter.SearchAdapter
 import sg.vinova.besttrip.base.BaseBFragment
+import sg.vinova.besttrip.exts.debug
+import sg.vinova.besttrip.exts.error
+import sg.vinova.besttrip.exts.setUpHideSoftKeyboard
 import sg.vinova.besttrip.model.YourDirection
 import sg.vinova.besttrip.model.autocomplete.Prediction
 import sg.vinova.besttrip.model.places.Location
@@ -18,13 +21,8 @@ import sg.vinova.besttrip.model.places.Result
 import sg.vinova.besttrip.presenter.result.SearchPresenter
 import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.activities.MapActivity
-import sg.vinova.besttrip.utils.KeyboardUtils
-import sg.vinova.besttrip.utils.LogUtils
 import javax.inject.Inject
 
-/**
- * Created by Hanah on 12/7/2017.
- */
 class SearchFragment : BaseBFragment() {
 
     private lateinit var mActivity: MapActivity
@@ -33,7 +31,8 @@ class SearchFragment : BaseBFragment() {
     private lateinit var nAdapter: NearbyAdapter
     private var listNearby: ArrayList<Result> = ArrayList()
 
-    @Inject lateinit var presenter: SearchPresenter
+    @Inject
+    lateinit var presenter: SearchPresenter
 
     companion object {
         fun newInstance(direction: YourDirection): SearchFragment {
@@ -42,6 +41,8 @@ class SearchFragment : BaseBFragment() {
             return fragment
         }
     }
+
+    override fun getLeftIcon(): Int = 0
 
     override fun getLayoutId(): Int = R.layout.fragment_search
 
@@ -54,9 +55,10 @@ class SearchFragment : BaseBFragment() {
         if (activity is MapActivity)
             mActivity = activity as MapActivity
 
-        KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
-
-        mActivity.bToolbar.setToolbarTitle("Search")
+        mActivity.apply {
+            setUpHideSoftKeyboard(layoutContainer)
+            title = "Search"
+        }
 
         sAdapter = SearchAdapter()
         nAdapter = NearbyAdapter()
@@ -101,7 +103,7 @@ class SearchFragment : BaseBFragment() {
         nAdapter.listener = object : BaseListener.OnItemClickListener<Location> {
             override fun onItemClick(t: Location) {
                 direction.destination = t
-                LogUtils.bDebug(this.javaClass, "Destination: ${t.lat}, ${t.lng}")
+                javaClass.debug("Destination: ${t.lat}, ${t.lng}")
 //                changeFragment(ResultFragment.newInstance(direction), false)
             }
 
@@ -136,8 +138,8 @@ class SearchFragment : BaseBFragment() {
     }
 
     fun error(error: String?) {
-        LogUtils.bError(this.javaClass, error!!)
-        snackbar(view!!, error)
+        javaClass.error(error!!)
+        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
     }
 
     fun getNearbySuccess(results: ArrayList<Result>?) {
@@ -164,7 +166,7 @@ class SearchFragment : BaseBFragment() {
     fun getLocationByPlaceIdSuccess(location: Location?) {
         if (location == null) return
         direction.destination = location
-        LogUtils.bDebug(this.javaClass, "Destination: ${location.lat}, ${location.lng}")
+        javaClass.debug("Destination: ${location.lat}, ${location.lng}")
 //                changeFragment(ResultFragment.newInstance(direction), false)
     }
 }

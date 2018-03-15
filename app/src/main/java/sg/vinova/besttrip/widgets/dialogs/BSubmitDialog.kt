@@ -9,19 +9,16 @@ import sg.vinova.besttrip.R
 /**
  * Created by Hanah on 12/2/2017.
  */
-class BSubmitDialog(context: Context) : Dialog(context), View.OnClickListener {
+class BSubmitDialog(context: Context) : Dialog(context) {
+    var listener: View.OnClickListener? = null
+
     init {
         setContentView(R.layout.view_dialog_submit)
         tvTitle.text = context.resources.getString(R.string.exit)
         tvMessage.text = context.resources.getString(R.string.exit_message)
-        btnOk.setOnClickListener(this)
-        btnCancel.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.btnOk -> cancel()
-            R.id.btnCancel -> dismiss()
+        if (listener != null) {
+            btnOk.setOnClickListener(listener)
+            btnCancel.setOnClickListener(listener)
         }
     }
 }

@@ -37,14 +37,14 @@ class BButton : Button {
          * Font family
          * Default is Roboto Regular
          */
-        fontFamily = when (typedArray.getInt(R.styleable.BButton_bFont, 0)) {
-            0 -> resources.getString(R.string.roboto_regular)
-            1 -> resources.getString(R.string.roboto_light)
-            2 -> resources.getString(R.string.roboto_bold)
-            3 -> resources.getString(R.string.roboto_medium)
-            else -> resources.getString(R.string.roboto_regular)
-        }
-        setFont(context, fontFamily)
+//        fontFamily = when (typedArray.getInt(R.styleable.BButton_bFont, 0)) {
+//            0 -> resources.getString(R.string.roboto_regular)
+//            1 -> resources.getString(R.string.roboto_light)
+//            2 -> resources.getString(R.string.roboto_bold)
+//            3 -> resources.getString(R.string.roboto_medium)
+//            else -> resources.getString(R.string.roboto_regular)
+//        }
+//        setFont(context, fontFamily)
 
         /**
          * Set text color

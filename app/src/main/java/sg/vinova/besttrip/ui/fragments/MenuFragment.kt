@@ -7,12 +7,13 @@ import kotlinx.android.synthetic.main.fragment_menu.*
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
+import sg.vinova.besttrip.exts.debug
+import sg.vinova.besttrip.exts.error
+import sg.vinova.besttrip.exts.loadCircleImage
 import sg.vinova.besttrip.presenter.MenuPresenter
 import sg.vinova.besttrip.ui.activities.LoginActivity
 import sg.vinova.besttrip.ui.activities.MapActivity
 import sg.vinova.besttrip.ui.fragments.result.MapFragment
-import sg.vinova.besttrip.utils.GlideUtils
-import sg.vinova.besttrip.utils.LogUtils
 import sg.vinova.besttrip.widgets.dialogs.BErrorDialog
 import javax.inject.Inject
 
@@ -20,9 +21,8 @@ import javax.inject.Inject
  * Created by Hanah on 11/23/2017.
  */
 class MenuFragment : BaseBFragment(), View.OnClickListener {
-
-
-    @Inject lateinit var presenter: MenuPresenter
+    @Inject
+    lateinit var presenter: MenuPresenter
     private lateinit var mActivity: MapActivity
     private lateinit var mUser: FirebaseUser
     private lateinit var mAuth: FirebaseAuth
@@ -30,6 +30,8 @@ class MenuFragment : BaseBFragment(), View.OnClickListener {
     companion object {
         fun newInstance(): MenuFragment = MenuFragment()
     }
+
+    override fun getLeftIcon(): Int = 0
 
     override fun getLayoutId(): Int = R.layout.fragment_menu
 
@@ -61,7 +63,7 @@ class MenuFragment : BaseBFragment(), View.OnClickListener {
     }
 
     private fun initAnonymousView() {
-        GlideUtils.loadImage(R.drawable.avatar_placeholder, activity!!, ivAvatar)
+        ivAvatar.loadCircleImage(R.drawable.avatar_placeholder)
         tvUsername.text = getString(R.string.login_now)
         tvEmail.text = getString(R.string.guest)
 
@@ -69,7 +71,7 @@ class MenuFragment : BaseBFragment(), View.OnClickListener {
     }
 
     private fun initView() {
-        GlideUtils.loadImageFromURL(mUser.photoUrl, activity!!, ivAvatar, R.drawable.avatar_placeholder)
+        ivAvatar.loadCircleImage(mUser.photoUrl)
         tvUsername.text = mUser.displayName
         tvEmail.text = mUser.email
     }
@@ -84,9 +86,7 @@ class MenuFragment : BaseBFragment(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.tvUsername -> {
-                if (activity !is LoginActivity) changeActivity(LoginActivity::class.java)
-            }
+            R.id.tvUsername -> if (activity !is LoginActivity) changeActivity(LoginActivity::class.java)
             R.id.tvHome -> {
                 if (activity !is MapActivity) changeActivity(MapActivity::class.java)
                 else changeFragment(MapFragment.newInstance(), false)
@@ -95,19 +95,17 @@ class MenuFragment : BaseBFragment(), View.OnClickListener {
 //                if (activity is MapActivity) changeActivity()
 //                else changeFragment()
             }
-            R.id.tvLogOut -> {
-                presenter.logout(mAuth)
-            }
+            R.id.tvLogOut -> presenter.logout(mAuth)
         }
     }
 
     fun logoutSuccess() {
-        LogUtils.bDebug(this.javaClass, "Logout success")
+        javaClass.debug("Logout success")
         changeActivity(LoginActivity::class.java)
     }
 
     fun error(error: String?) {
-        LogUtils.bError(this.javaClass, error!!)
+        javaClass.error(error!!)
         BErrorDialog(context).setMessage(error)!!.show()
     }
 }

@@ -1,28 +1,32 @@
 package sg.vinova.besttrip.ui.fragments.account
 
-import android.text.TextUtils
 import android.view.View
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_forgot.*
-import org.jetbrains.anko.design.snackbar
 import sg.vinova.besttrip.BApplication
 import sg.vinova.besttrip.R
 import sg.vinova.besttrip.base.BaseBFragment
+import sg.vinova.besttrip.exts.debug
+import sg.vinova.besttrip.exts.error
+import sg.vinova.besttrip.exts.info
+import sg.vinova.besttrip.exts.setUpHideSoftKeyboard
 import sg.vinova.besttrip.presenter.account.ForgotPresenter
-import sg.vinova.besttrip.services.BaseListener
 import sg.vinova.besttrip.ui.activities.LoginActivity
-import sg.vinova.besttrip.utils.KeyboardUtils
-import sg.vinova.besttrip.utils.LogUtils
 import sg.vinova.besttrip.widgets.dialogs.BErrorDialog
 import javax.inject.Inject
 
 /**
  * Created by hanah on 11/27/17.
  */
-class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToolbarClickListener {
+class ForgotFragment : BaseBFragment(), View.OnClickListener {
     private lateinit var mActivity: LoginActivity
-    @Inject lateinit var presenter: ForgotPresenter
+    @Inject
+    lateinit var presenter: ForgotPresenter
     private lateinit var mAuth: FirebaseAuth
+
+    override fun getLeftIcon(): Int = R.drawable.back
 
     companion object {
         fun newInstance(): ForgotFragment = ForgotFragment()
@@ -39,10 +43,9 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
         if (activity is LoginActivity)
             mActivity = activity as LoginActivity
 
-        KeyboardUtils.setUpHideSoftKeyboard(mActivity, layoutContainer)
-
-        mActivity.showToolbar()
-        mActivity.bToolbar.setLeftIcon(R.drawable.back)
+        mActivity.apply {
+            setUpHideSoftKeyboard(layoutContainer)
+        }
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -50,7 +53,6 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
     }
 
     private fun onClick() {
-        mActivity.bToolbar.listener = this
         btnSend.setOnClickListener(this)
     }
 
@@ -65,37 +67,25 @@ class ForgotFragment : BaseBFragment(), View.OnClickListener, BaseListener.OnToo
     private var email: String = ""
 
     override fun onClick(v: View?) {
-        if (v == null) return
-        if (!TextUtils.isEmpty(edtEmail.text) || edtEmail.text != null)
-            email = edtEmail.text.toString()
-
-        when (v.id) {
+        when (v?.id) {
             R.id.btnSend -> {
-                LogUtils.bDebug(this.javaClass, "Send click, email: $email")
-                if (!TextUtils.isEmpty(email)) presenter.forgotPassword(mAuth, email)
+                if (edtEmail.text.isNotEmpty()) {
+                    email = edtEmail.text.toString()
+                    presenter.forgotPassword(mAuth, email)
+                    javaClass.debug("Send click, email: $email")
+                } else edtEmail.error = getString(R.string.email_is_empty)
             }
         }
     }
 
-    override fun onLeftClick() {
-        LogUtils.bDebug(this.javaClass, "On Left Click")
-        mActivity.onBackPressed()
-    }
-
-    override fun onRightClick() {
-        LogUtils.bDebug(this.javaClass, "On Right Click")
-    }
-
     fun forgotSuccess() {
-        snackbar(this.view!!, "Please check your mailbox to reset your password.")
-        LogUtils.bInfo(this.javaClass, "An email reset password has sent to $email!")
-        if (!TextUtils.isEmpty(email))
-            changeFragment(LoginFragment.newInstance(email), false)
-        changeFragment(LoginFragment.newInstance(), false)
+        Toast.makeText(context, "Please check your mailbox to reset your password.", Toast.LENGTH_SHORT).show()
+        javaClass.info("An email reset password has sent to $email!")
+        changeFragment(LoginFragment.newInstance(email), false)
     }
 
     fun error(error: String?) {
-        LogUtils.bError(this.javaClass, error!!)
+        javaClass.error(error!!)
         BErrorDialog(context).setMessage(error)!!.show()
     }
 }

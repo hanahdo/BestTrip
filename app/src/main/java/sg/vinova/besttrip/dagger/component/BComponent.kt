@@ -17,11 +17,8 @@ import sg.vinova.besttrip.ui.fragments.result.MapFragment
 import sg.vinova.besttrip.ui.fragments.result.SearchFragment
 import javax.inject.Singleton
 
-/**
- * Created by hanah on 11/22/17.
- */
 @Singleton
-@Component(modules = arrayOf(BModule::class))
+@Component(modules = [(BModule::class)])
 interface BComponent {
     /**
      * Inject Application

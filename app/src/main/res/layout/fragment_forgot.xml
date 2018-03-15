@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <sg.vinova.besttrip.widgets.BTextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_padding_bigger"
         android:layout_marginTop="50dp"
         android:text="@string/enter_your_email_address_to_reset_password"
-        app:bFontColor="@color/background" />
+        android:textAlignment="center" />
 
-    <sg.vinova.besttrip.widgets.BEditText
+    <EditText
+        style="@style/BEditText"
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_login_views_height"
@@ -23,22 +23,22 @@
         android:drawablePadding="@dimen/default_padding"
         android:drawableStart="@drawable/mail_off"
         android:elevation="@dimen/default_elevation"
+        android:fontFamily="@font/roboto_light"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:paddingEnd="@dimen/default_padding"
         android:paddingStart="@dimen/default_padding"
-        android:textSize="@dimen/default_text_size"
-        app:bFont="RobotoLight"
-        app:bHint="@string/email" />
+        android:textSize="@dimen/default_text_size" />
 
-    <sg.vinova.besttrip.widgets.BButton
+    <Button
         android:id="@+id/btnSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/default_padding_xx"
         android:layout_marginStart="@dimen/default_padding_xx"
         android:layout_marginTop="@dimen/default_padding"
+        android:background="@drawable/bg_b_button_dark"
         android:text="@string/send_instruction"
-        app:bBackground="@drawable/bg_b_button_dark"
-        app:bFontColor="@color/white" />
+        android:textColor="@color/white" />
 
 </LinearLayout>

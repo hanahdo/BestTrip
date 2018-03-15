@@ -5,17 +5,15 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.activity_login.*
 import sg.vinova.besttrip.R
 
-/**
- * Created by hanah on 11/22/17.
- */
 abstract class BaseBFragment : Fragment() {
     private lateinit var baseActivity: BaseBActivity
 
     abstract fun getLayoutId(): Int
 
-//  fun getLeftIcon(): Int
+    abstract fun getLeftIcon(): Int
 
     abstract fun inject()
 
@@ -30,6 +28,10 @@ abstract class BaseBFragment : Fragment() {
         inject()
         if (activity is BaseBActivity)
             baseActivity = activity as BaseBActivity
+
+        baseActivity.apply {
+            toolbar.setLeftIcon(getLeftIcon())
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,8 +52,8 @@ abstract class BaseBFragment : Fragment() {
 
     open fun getBaseBActivity(): BaseBActivity = baseActivity
 
-    fun changeFragment(fragment: BaseBFragment, addBackStack: Boolean) {
-        baseActivity.changeFragment(fragment, addBackStack)
+    fun changeFragment(fragment: BaseBFragment, addBackStack: Boolean = false, isAnim: Boolean = false) {
+        baseActivity.changeFragment(fragment, addBackStack, isAnim)
     }
 
     fun replaceFragment(fragment: BaseBFragment, containerId: Int) {

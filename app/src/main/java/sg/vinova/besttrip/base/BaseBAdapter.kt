@@ -7,7 +7,9 @@ import java.util.*
 /**
  * Created by Hanah on 11/22/2017.
  */
-open class BaseBAdapter<DATA, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
+abstract class BaseBAdapter<DATA, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>() {
+
+
     private var list = ArrayList<DATA>()
     var lastPosition = -1
 
@@ -16,9 +18,11 @@ open class BaseBAdapter<DATA, VH : RecyclerView.ViewHolder> : RecyclerView.Adapt
     override fun onBindViewHolder(holder: VH, position: Int) {
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): VH? {
-        return null
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+        return getViewHolder(parent, viewType)
     }
+
+    abstract fun getViewHolder(parent: ViewGroup, viewType: Int): VH
 
     fun add(data: DATA?) {
         if (data == null)
